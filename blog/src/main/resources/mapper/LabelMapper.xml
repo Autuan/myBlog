@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.autuan.blog.mapper.LabelMapper" >
+  <resultMap id="BaseResultMap" type="com.autuan.blog.entity.Label" >
+    <id column="label_id" property="labelId" jdbcType="INTEGER" />
+    <result column="label_value" property="labelValue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    label_id, label_value
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from label
+    where label_id = #{labelId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from label
+    where label_id = #{labelId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.autuan.blog.entity.Label" >
+    insert into label (label_id, label_value)
+    values (#{labelId,jdbcType=INTEGER}, #{labelValue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.autuan.blog.entity.Label" >
+    insert into label
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="labelId != null" >
+        label_id,
+      </if>
+      <if test="labelValue != null" >
+        label_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="labelId != null" >
+        #{labelId,jdbcType=INTEGER},
+      </if>
+      <if test="labelValue != null" >
+        #{labelValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.autuan.blog.entity.Label" >
+    update label
+    <set >
+      <if test="labelValue != null" >
+        label_value = #{labelValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where label_id = #{labelId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.autuan.blog.entity.Label" >
+    update label
+    set label_value = #{labelValue,jdbcType=VARCHAR}
+    where label_id = #{labelId,jdbcType=INTEGER}
+  </update>
+</mapper>

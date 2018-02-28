@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.autuan.blog.mapper.LoginTableMapper" >
+  <resultMap id="BaseResultMap" type="com.autuan.blog.entity.LoginTable" >
+    <id column="login_id" property="loginId" jdbcType="INTEGER" />
+    <result column="login_name" property="loginName" jdbcType="VARCHAR" />
+    <result column="login_email" property="loginEmail" jdbcType="VARCHAR" />
+    <result column="login_password" property="loginPassword" jdbcType="VARCHAR" />
+    <result column="login_question1" property="loginQuestion1" jdbcType="VARCHAR" />
+    <result column="login_question2" property="loginQuestion2" jdbcType="VARCHAR" />
+    <result column="login_answer1" property="loginAnswer1" jdbcType="VARCHAR" />
+    <result column="login_answer2" property="loginAnswer2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    login_id, login_name, login_email, login_password, login_question1, login_question2, 
+    login_answer1, login_answer2
+  </sql>
+
+  <select id="haveThisUser" resultType="Integer">
+    SELECT COUNT(*) FROM login_table WHERE login_name = #{username}
+  </select>
+  <select id="tryLog" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from login_table
+    WHERE
+    login_name=#{username} AND login_password=#{password}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from login_table
+    where login_id = #{loginId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from login_table
+    where login_id = #{loginId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.autuan.blog.entity.LoginTable" >
+    insert into login_table (login_id, login_name, login_email, 
+      login_password, login_question1, login_question2, 
+      login_answer1, login_answer2)
+    values (#{loginId,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, #{loginEmail,jdbcType=VARCHAR}, 
+      #{loginPassword,jdbcType=VARCHAR}, #{loginQuestion1,jdbcType=VARCHAR}, #{loginQuestion2,jdbcType=VARCHAR}, 
+      #{loginAnswer1,jdbcType=VARCHAR}, #{loginAnswer2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.autuan.blog.entity.LoginTable" >
+    insert into login_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="loginId != null" >
+        login_id,
+      </if>
+      <if test="loginName != null" >
+        login_name,
+      </if>
+      <if test="loginEmail != null" >
+        login_email,
+      </if>
+      <if test="loginPassword != null" >
+        login_password,
+      </if>
+      <if test="loginQuestion1 != null" >
+        login_question1,
+      </if>
+      <if test="loginQuestion2 != null" >
+        login_question2,
+      </if>
+      <if test="loginAnswer1 != null" >
+        login_answer1,
+      </if>
+      <if test="loginAnswer2 != null" >
+        login_answer2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="loginId != null" >
+        #{loginId,jdbcType=INTEGER},
+      </if>
+      <if test="loginName != null" >
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginEmail != null" >
+        #{loginEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPassword != null" >
+        #{loginPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="loginQuestion1 != null" >
+        #{loginQuestion1,jdbcType=VARCHAR},
+      </if>
+      <if test="loginQuestion2 != null" >
+        #{loginQuestion2,jdbcType=VARCHAR},
+      </if>
+      <if test="loginAnswer1 != null" >
+        #{loginAnswer1,jdbcType=VARCHAR},
+      </if>
+      <if test="loginAnswer2 != null" >
+        #{loginAnswer2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.autuan.blog.entity.LoginTable" >
+    update login_table
+    <set >
+      <if test="loginName != null" >
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginEmail != null" >
+        login_email = #{loginEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPassword != null" >
+        login_password = #{loginPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="loginQuestion1 != null" >
+        login_question1 = #{loginQuestion1,jdbcType=VARCHAR},
+      </if>
+      <if test="loginQuestion2 != null" >
+        login_question2 = #{loginQuestion2,jdbcType=VARCHAR},
+      </if>
+      <if test="loginAnswer1 != null" >
+        login_answer1 = #{loginAnswer1,jdbcType=VARCHAR},
+      </if>
+      <if test="loginAnswer2 != null" >
+        login_answer2 = #{loginAnswer2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where login_id = #{loginId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.autuan.blog.entity.LoginTable" >
+    update login_table
+    set login_name = #{loginName,jdbcType=VARCHAR},
+      login_email = #{loginEmail,jdbcType=VARCHAR},
+      login_password = #{loginPassword,jdbcType=VARCHAR},
+      login_question1 = #{loginQuestion1,jdbcType=VARCHAR},
+      login_question2 = #{loginQuestion2,jdbcType=VARCHAR},
+      login_answer1 = #{loginAnswer1,jdbcType=VARCHAR},
+      login_answer2 = #{loginAnswer2,jdbcType=VARCHAR}
+    where login_id = #{loginId,jdbcType=INTEGER}
+  </update>
+</mapper>
