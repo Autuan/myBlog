@@ -21,4 +21,24 @@ public class LoginServiceImpl implements LoginService {
     public LoginTable tryLog(String username, String password) {
         return loginTableMapper.tryLog(username,password);
     }
+
+    @Override
+    public int register(LoginTable newUser) {
+        return loginTableMapper.insertSelective(newUser);
+    }
+
+    @Override
+    public int forgetPassword(String[] question, String[] answer) {
+        return 0;
+    }
+
+    @Override
+    public String getEmailAddress(String username) {
+        return null;
+    }
+
+    @Override
+    public String getPhoneNumber(String username) {
+        return null;
+    }
 }

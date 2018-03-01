@@ -59,17 +59,67 @@ public class LoginController {
      * 注册
      * @return
      */
-    public String register(){
-        return "";
+    public Map<String,String> register(String username,String password){
+        // 判断输入的合法性
+        Map<String,String> map = LoginUtil.checkUsernameFormal(username,password);
+        if ( !map.get("describe").equals("success") ) {
+            return map;
+        }
+        // 用户名核对
+        Integer num = loginService.haveThisUser(username);
+        if ( num == 1 ) {
+            map.put("describe","This username already existed");
+            return map;
+        }
+        // 字符加密
+        password = LoginUtil.getSHA256Str(password);
+        LoginTable newUser = new LoginTable();
+        newUser.setLoginName(username);
+        newUser.setLoginPassword(password);
+        int result = loginService.register(newUser);
+        if (result > 1) {
+            map.put("result","success");
+        } else {
+            map.put("describe","unknow error , try again later please");
+        }
+        return map;
     }
 
     /**
      * 找回密码
      * @return
      */
-    public String forgetPassword(){
-        return "";
+    // 密保验证
+    public String forgetPassword(String question[],String answer[]){
+        // 验证
+        int result = loginService.forgetPassword(question,answer);
+        if (result == 1) {
+            return "success";
+        } else {
+            return "error";
+        }
     }
+    // 邮箱验证
+    public String forgetPasswordByEmail(String username){
+        // 查询邮箱
+        String emailAddress = loginService.getEmailAddress(username);
+        // 调用邮箱接口
+        // 返回结果
+        return "success";
+    }
+    // 手机验证
+    public String forgetPasswordByPhone(String username) {
+        // 查询手机号
+        String phoneNumber = loginService.getPhoneNumber(username);
+        // 调用邮箱接口
+        // 返回结果
+        return "success";
+    }
+    // 修改密码
+    public void changePassword(String username , String password) {
+        return;
+    }
+
     // 跳转登陆页方法,test使用
     @RequestMapping("/toLogin")
     public String toLogin(){
