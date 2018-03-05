@@ -20,6 +20,13 @@
     article_publish_time, article_alert_time, article_count_view, article_count_agree, 
     article_hot, article_url, label_id
   </sql>
+
+  <select id="getArticleList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from article
+  </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
