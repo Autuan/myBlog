@@ -18,6 +18,7 @@
         }
     </style>
 </head>
+
 <body>
 <!-- 头部 (应该导入) -->
 <!--<nav class="navbar navbar-static-top navbar-default">-->
@@ -44,7 +45,7 @@
 
 <!-- 头部 over-->
 
-<div th:include="/commons/head.html"></div>
+<div th:include="head"></div>
 
 <!-- 主体 over -->
 <div class="container">
@@ -78,14 +79,57 @@
             </div>
         </div>
 
+        <div th:each="article,aritcleStat : ${articleList}">
+            <div class="article">
+                <div class="articleTitle">
+                    <h3 th:text="${article.articleTitle}">testText</h3>
+                    <small th:text="${article.articleContentSub}">test...</small>
+                </div>
+                <div class="articleContent">
+                    <span th:text="${article.articleContent}">这是一段用于测试的短语,无任何含义.</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- 右侧信息 -->
     <div class="menuRight">
+        <div id="myCarousel" class="carousel slide">
+            <!-- 轮播（Carousel）指标 -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <!-- 轮播（Carousel）项目 -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="/img/east.jpg" alt="First slide" />
+                </div>
+                <div class="item">
+                    <img src="/img/east2.jpg" alt="Second slide" />
+                </div>
+                <div class="item">
+                    <img src="/img/03.jpg" alt="Third slide" />
+                </div>
+            </div>
+            <!-- 轮播（Carousel）导航 -->
+            <a class="carousel-control left" href="#myCarousel"
+               data-slide="prev">&lsaquo;
+            </a>
+            <a class="carousel-control right" href="#myCarousel"
+               data-slide="next">&rsaquo;
+            </a>
+        </div>
+
         <div>
             <h4>告示板</h4><br />
             <span>这是一段用于测试的短语,无任何含义.这是一段用于测试的短语,无任何含义.</span>
         </div>
+
+        <button class="btn btn-info block" id="callAuthor">联系我</button><br />
+        <button class="btn btn-info block" id="applyingLink">申请友链</button>
+
         <div th:include="tempFile"></div>
     </div>
 </div>
@@ -111,7 +155,54 @@
 </div>
 <!-- 脚部 over-->
 
+<!-- modal -->
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"  id="promptModal">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content" id="modalContent">
+        </div>
+    </div>
+</div>
+
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/alertTip.js"></script>
+<!--<script>-->
+    <!--$(function(){-->
+       <!--$.ajax({-->
+          <!--url:"/getArticleList",-->
+          <!--success:function (obj) {-->
+              <!--console.log(obj);-->
+              <!--/* <![CDATA[ */-->
+              <!--for(var i=0;i<obj.length;i++){-->
+                  <!--console.log(i);-->
+              <!--}-->
+              <!--/* <![CDATA[ */-->
+          <!--}-->
+       <!--});-->
+    <!--});-->
+<!--</script>-->
+<script>
+    $(function () {
+        $("#callAuthor").click(function () {
+            jQuery.alertWindow("修改成功");
+        });
+        $("#applyingLink").click(function () {
+
+        });
+    });
+    function alertModal(content) {
+        $("#promptModal").modal('toggle');
+        $("#modalContent").text(content);
+        //定时器，1秒后关闭提示
+        setTimeout(function () {
+            $("#promptModal").modal('toggle');
+        },1000);
+    }
+    $(function () {
+        $("#searchBegin").click(function () {
+            alertModal("此功能尚未完善");
+        });
+    });
+</script>
 </body>
 </html>
