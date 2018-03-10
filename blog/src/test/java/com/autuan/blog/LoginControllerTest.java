@@ -15,9 +15,9 @@ public class LoginControllerTest {
 
     @Test
     public void tryLog(){
-        String username = "autuan";
-        String password = "mm10086";
-        Map<String,String> map = loginController.login(username,password);
-        System.out.println(map.toString());
+//        String username = "autuan";
+//        String password = "mm10086";
+//        Map<String,String> map = loginController.login(username,password);
+//        System.out.println(map.toString());
     }
 }

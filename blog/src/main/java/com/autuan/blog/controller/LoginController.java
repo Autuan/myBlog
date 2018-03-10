@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +31,7 @@ public class LoginController {
      */
     @RequestMapping("/login")
     @ResponseBody
-    public Map<String,String> login(String username,String password){
+    public Map<String,String> login(String username, String password, HttpServletRequest request){
         // 用户和密码 合法性检查
         Map<String,String> map = LoginUtil.checkUsernameFormal(username,password);
         if ( !map.get("describe").equals("success") ) {
@@ -49,6 +51,11 @@ public class LoginController {
         if ( null == loginTable ) {
             map.put("describe","password is error");
         // 执行登陆成功指令
+        // 丨→保存 session 在服务器
+            HttpSession session = request.getSession();
+            session.setAttribute(loginTable.getLoginName(),loginTable);
+            // 时间设置
+            session.setMaxInactiveInterval(60);
         } else {
             map.put("result","success");
         }

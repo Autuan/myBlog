@@ -16,11 +16,12 @@ public class ShowController {
 
     @RequestMapping("/")
     public ModelAndView toIndex(ModelAndView mav){
+        // 取文章列表
+        List<Article> articles = articleService.getArticleList();
+        //
+        mav.addObject("articleList",articles);
         mav.addObject("tempFile","tempFile.html");
         mav.setViewName("index");
-
-        List<Article> articles = articleService.getArticleList();
-        mav.addObject("articleList",articles);
         return mav;
     }
 }
