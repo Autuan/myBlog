@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta charset="UTF-8">
 		<title>****asdfasdfasdfasdf****</title>
@@ -7,44 +7,21 @@
 		<link href="css/bootstrap-theme.min.css" rel="stylesheet"/>
 	</head>
 	<body>
-		<!-- 头部 (应该导入) -->
-	    <nav class="navbar navbar-static-top navbar-default">
-	      <div class="container">
-	        <div class="navbar-header">
-	          <a class="navbar-brand" href="http://10.1.54.67:8082">
-	          	<img src="img/logo-h-word.png" />
-	          </a>
-	        </div>
-	        <div id="navbar" class="navbar-collapse collapse">
-	          <form class="navbar-form navbar-right" id="logForm">
-	            <div class="form-group">
-	              <input type="text" placeholder="用户名" class="form-control" name="username">
-	            </div>
-	            <div class="form-group">
-	              <input type="password" placeholder="密码" class="form-control" name="password">
-	            </div>
-	            <button type="submit" class="btn btn-success">登陆</button>
-	            <button type="button" class="btn btn-info">注册</button>
-	          </form>
-	        </div><!--/.navbar-collapse -->
-	      </div>
-	    </nav>
-    
-		<!-- 头部 over-->
+	<div th:include="head"></div>
 			
 		<!-- 文章详情 文章内容动态生成，等待有空后，转为静态化页面 -->	
 		<div class="container">
 			<!-- 文章标题 -->
 			<div class="title">
 				<!-- 标题 -->
-				<h3>我喜欢的古诗。。。</h3><br />
+				<h3 th:text="${article.articleTitle}">我喜欢的古诗。。。</h3><br />
 				<!-- 小字内容 -->
-				<h5>2018-02-07 10:15:26</h5> <!-- 时间 -->
-				<h5>&nbsp;view:&nbsp;13</h5><!-- 点击数 -->
+				<h5 th:text="${article.articlePublishTime}">2018-02-07 10:15:26</h5> <!-- 时间 -->
+				<h5 >&nbsp;view:&nbsp;<span th:text="${article.articleCountView}"></span></h5><!-- 点击数 -->
 			</div>
 			
 			<!-- 文章内容 -->
-			<div class="content">
+			<div class="content" th:text="${article.articleContentSub}">
 				君不見，黃河之水天上來，奔流到海不復回。
 				君不見，高堂明鏡悲白髮，朝如青絲暮成雪。
 				人生得意須盡歡，莫使金樽空對月。
@@ -66,6 +43,7 @@
 		<div class="friendUrl">友情链接</div>
 		<a href="#">链接A</a>
 		<a href="#">链接B</a>
+
 		<!-- 脚部信息 -->
 		<footer class="panel-footer">
 			
@@ -80,7 +58,7 @@
 		</div>
 		<!-- 脚部 over-->
 		
-		<script src="js/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
+		<script src="/js/jquery.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
 	</body>
 </html>

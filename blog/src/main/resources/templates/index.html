@@ -82,13 +82,13 @@
         <div th:each="article,aritcleStat : ${articleList}">
             <div class="article">
                 <div class="articleTitle">
-                    <h3 th:text="${article.articleTitle}">testText</h3>
+                    <a th:text="${article.articleTitle}" href="${article.articleUrl}">testText</a>
                     <small th:text="${article.articleContentSub}">test...</small>
                 </div>
                 <div class="articleContent">
                     <span th:text="${article.articleContent}">这是一段用于测试的短语,无任何含义.</span>
                 </div>
-                <button class="btn btn-default articleBtn" value="localhost:8085">详情...</button>
+
             </div>
         </div>
     </div>
