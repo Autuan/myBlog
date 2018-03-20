@@ -82,7 +82,7 @@
         <div th:each="article,aritcleStat : ${articleList}">
             <div class="article">
                 <div class="articleTitle">
-                    <a th:text="${article.articleTitle}" href="${article.articleUrl}">testText</a>
+                    <a th:text="${article.articleTitle}" th:href="@{${article.articleUrl}}">testText</a>
                     <small th:text="${article.articleContentSub}">test...</small>
                 </div>
                 <div class="articleContent">

@@ -24,4 +24,9 @@ public class ShowController {
         mav.setViewName("index");
         return mav;
     }
+//
+//    @RequestMapping("/")
+//    public ModelAndView toArticleShow(){
+//
+//    }
 }

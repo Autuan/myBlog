@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 	<head>
-		<meta charset="UTF-8">
-		<title>****asdfasdfasdfasdf****</title>
-		<link href="css/bootstrap.min.css" rel="stylesheet"/>
-		<link href="css/bootstrap-theme.min.css" rel="stylesheet"/>
+		<meta charset="UTF-8" />
+		<title th:text="${article.articleTitle}"></title>
+		<link href="/css/bootstrap.css" rel="stylesheet"/>
+		<link href="/css/bootstrap-theme.css" rel="stylesheet"/>
 	</head>
 	<body>
 	<div th:include="head"></div>
@@ -49,9 +49,9 @@
 			
 			<div class="footSpan">
 			
-				<span>看山网络@Company LookMountain 2017-2027 IPC.RPC</span><br>
-				<span>网络经营许可证:GB/S:ICA98547344-5484CT-448S</span><br>
-				<span>地址:上海市54公路1708号</span><br>
+				<span>看山网络@Company LookMountain 2017-2027 IPC.RPC</span><br />
+				<span>网络经营许可证:GB/S:ICA98547344-5484CT-448S</span><br />
+				<span>地址:上海市54公路1708号</span><br />
 				
 			</div>
 		</footer>
