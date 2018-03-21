@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <link href="/css/bootstrap.css" rel="stylesheet"/>
+    <link href="/css/bootstrap-theme.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/forIndex.css" />
+    <style>
+        .menuRight{
+            float: right;
+            width: 400px;
+            height: 600px;
+            border: 1px solid red;
+        }
+        .menuLeft{
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+<!-- 头部 (应该导入) -->
+<!--<nav class="navbar navbar-static-top navbar-default">-->
+    <!--<div class="container">-->
+        <!--<div class="navbar-header">-->
+            <!--<a class="navbar-brand" href="http://10.1.54.67:8082">-->
+                <!--<img src="img/logo-h-word.png" />-->
+            <!--</a>-->
+        <!--</div>-->
+        <!--<div id="navbar" class="navbar-collapse collapse">-->
+            <!--<form class="navbar-form navbar-right" id="logForm">-->
+                <!--<div class="form-group">-->
+                    <!--<input type="text" placeholder="用户名" class="form-control" name="username" />-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<input type="password" placeholder="密码" class="form-control" name="password" />-->
+                <!--</div>-->
+                <!--<button type="submit" class="btn btn-success">登陆</button>-->
+                <!--<button type="button" class="btn btn-info">注册</button>-->
+            <!--</form>-->
+        <!--</div>&lt;!&ndash;/.navbar-collapse &ndash;&gt;-->
+    <!--</div>-->
+<!--</nav>-->
+
+<!-- 头部 over-->
+
+<div th:include="head"></div>
+
+<!-- 主体 over -->
+<div class="container">
+    <!-- 左侧目录 -->
+    <div class="menuLeft">
+        <div class="article">
+            <div class="articleTitle">
+                <h3>123456789<small>&nbsp;2018.03.04 10:05:02 view:5</small></h3>
+            </div>
+            <div class="articleContent">
+                <small>123456789123456789</small>
+            </div>
+        </div>
+
+        <div class="article">
+            <div class="articleTitle">
+                <h3>123456789<small>&nbsp;2018.03.04 10:05:02 view:5</small></h3>
+            </div>
+            <div class="articleContent">
+                <small>123456789123456789</small>
+            </div>
+        </div>
+
+
+        <div class="article">
+            <div class="articleTitle">
+                <a href="localhost:8085/" class="h3">1234567</a>
+            </div>
+            <div class="articleContent">
+                <a href="localhost:8085/" class="h4" th:text="555555555555555555555">这是一段用于测试的短语,无任何含义.</a>
+            </div>
+        </div>
+
+        <div th:each="article,aritcleStat : ${articleList}">
+            <div class="article">
+                <div class="articleTitle">
+                    <a th:text="${article.articleTitle}" th:href="@{${article.articleUrl}}">testText</a>
+                    <small th:text="${article.articleContentSub}">test...</small>
+                </div>
+                <div class="articleContent">
+                    <span th:text="${article.articleContent}">这是一段用于测试的短语,无任何含义.</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 右侧信息 -->
+    <div class="menuRight">
+        <div id="myCarousel" class="carousel slide">
+            <!-- 轮播（Carousel）指标 -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <!-- 轮播（Carousel）项目 -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="/img/east.jpg" alt="First slide" />
+                </div>
+                <div class="item">
+                    <img src="/img/east2.jpg" alt="Second slide" />
+                </div>
+                <div class="item">
+                    <img src="/img/03.jpg" alt="Third slide" />
+                </div>
+            </div>
+            <!-- 轮播（Carousel）导航 -->
+            <a class="carousel-control left" href="#myCarousel"
+               data-slide="prev">&lsaquo;
+            </a>
+            <a class="carousel-control right" href="#myCarousel"
+               data-slide="next">&rsaquo;
+            </a>
+        </div>
+
+        <div>
+            <h4>告示板</h4><br />
+            <span>这是一段用于测试的短语,无任何含义.这是一段用于测试的短语,无任何含义.</span>
+        </div>
+
+        <button class="btn btn-info block" id="callAuthor">联系我</button><br />
+        <button class="btn btn-info block" id="applyingLink">申请友链</button>
+
+        <div th:include="tempFile"></div>
+    </div>
+</div>
+<!-- 主体 over-->
+
+<!-- 脚部 (应该导入) -->
+<!-- 友情链接 -->
+<div class="container">
+    <div class="friendUrl">友情链接</div>
+    <a href="#">链接A</a>
+    <a href="#">链接B</a>
+    <!-- 脚部信息 -->
+    <footer class="panel-footer">
+
+        <div class="footSpan">
+
+            <span>看山网络@Company LookMountain 2017-2027 IPC.RPC</span><br/>
+            <span>网络经营许可证:GB/S:ICA98547344-5484CT-448S</span><br/>
+            <span>地址:上海市54公路1708号</span><br/>
+
+        </div>
+    </footer>
+</div>
+<!-- 脚部 over-->
+
+<!-- modal -->
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"  id="promptModal">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content" id="modalContent">
+        </div>
+    </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<!--<script src="/js/alertTip.js"></script>-->
+<!--<script>-->
+    <!--$(function(){-->
+       <!--$.ajax({-->
+          <!--url:"/getArticleList",-->
+          <!--success:function (obj) {-->
+              <!--console.log(obj);-->
+              <!--/* <![CDATA[ */-->
+              <!--for(var i=0;i<obj.length;i++){-->
+                  <!--console.log(i);-->
+              <!--}-->
+              <!--/* <![CDATA[ */-->
+          <!--}-->
+       <!--});-->
+    <!--});-->
+<!--</script>-->
+<script>
+    $(function () {
+        $("#callAuthor").click(function () {
+            jQuery.alertWindow("修改成功");
+        });
+        $("#applyingLink").click(function () {
+
+        });
+    });
+    function alertModal(content) {
+        $("#promptModal").modal('toggle');
+        $("#modalContent").text(content);
+        //定时器，1秒后关闭提示
+        setTimeout(function () {
+            $("#promptModal").modal('toggle');
+        },1000);
+    }
+//    搜索功能
+    $(function () {
+        $("#searchBegin").click(function () {
+            alertModal("此功能尚未完善");
+        });
+    });
+
+//    登陆注册功能
+    $(function () {
+        $("#logInButton").click(function () {
+           // 前台验证
+
+           // ------------------------- -------------------------
+           // 发送后台
+            var logInUrl = "/login/login";
+            var logInDate = {
+                username : $("#username").val(),
+                password : $("#password").val()
+            };
+            var logInCallback = function (obj) {
+                var result = obj.describe;
+                console.log(obj);
+                console.log(result);
+                if (result == "success") {
+                    alertModal("成功!");
+                // 丨→cookie 保存
+                    $.cookie('autuanBlog',$("#username").val(),{expires:0.0007});
+                // 刷新页面
+                    reload();
+                } else {
+                    alertModal("失败!");
+                }
+            };
+            $.post(logInUrl,logInDate,logInCallback,"json");
+//            $.ajax({
+//                type:"post",
+//                url:logInUrl,
+//                contentType: "application/json; charset=utf-8",
+//                dataType:"json",
+//                data:logInDate,
+//                success:logInCallback(obj);
+//            });
+        });
+    })
+</script>
+</body>
+</html>

@@ -21,7 +21,7 @@ public class ShowController {
         //
         mav.addObject("articleList",articles);
         mav.addObject("tempFile","tempFile.html");
-        mav.setViewName("index");
+        mav.setViewName("blogIndex");
         return mav;
     }
 //
@@ -29,4 +29,9 @@ public class ShowController {
 //    public ModelAndView toArticleShow(){
 //
 //    }
+
+    @RequestMapping("/back/")
+    public String toBackIndex(){
+        return "index";
+    }
 }
