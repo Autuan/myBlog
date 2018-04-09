@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <title>Title</title>
-    <link href="/css/bootstrap.css" rel="stylesheet"/>
-    <link href="/css/bootstrap-theme.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.css"/>
     <link rel="stylesheet" href="/css/forIndex.css" />
+    <link rel="stylesheet" href="/css/orbit-1.3.0.css" />
+
     <style>
         .menuRight{
             float: right;
@@ -15,6 +17,13 @@
         }
         .menuLeft{
             float: left;
+        }
+        .carouselArea img{
+            width:400px;
+            height: 300px;
+        }
+        .article {
+            margin-bottom: 30px;
         }
     </style>
 </head>
@@ -51,39 +60,39 @@
 <div class="container">
     <!-- 左侧目录 -->
     <div class="menuLeft">
-        <div class="article">
-            <div class="articleTitle">
-                <h3>123456789<small>&nbsp;2018.03.04 10:05:02 view:5</small></h3>
-            </div>
-            <div class="articleContent">
-                <small>123456789123456789</small>
-            </div>
-        </div>
+        <!--<div class="article">-->
+            <!--<div class="articleTitle">-->
+                <!--<h3>123456789<small>&nbsp;2018.03.04 10:05:02 view:5</small></h3>-->
+            <!--</div>-->
+            <!--<div class="articleContent">-->
+                <!--<small>123456789123456789</small>-->
+            <!--</div>-->
+        <!--</div>-->
 
-        <div class="article">
-            <div class="articleTitle">
-                <h3>123456789<small>&nbsp;2018.03.04 10:05:02 view:5</small></h3>
-            </div>
-            <div class="articleContent">
-                <small>123456789123456789</small>
-            </div>
-        </div>
+        <!--<div class="article">-->
+            <!--<div class="articleTitle">-->
+                <!--<h3>123456789<small>&nbsp;2018.03.04 10:05:02 view:5</small></h3>-->
+            <!--</div>-->
+            <!--<div class="articleContent">-->
+                <!--<small>123456789123456789</small>-->
+            <!--</div>-->
+        <!--</div>-->
 
 
-        <div class="article">
-            <div class="articleTitle">
-                <a href="localhost:8085/" class="h3">1234567</a>
-            </div>
-            <div class="articleContent">
-                <a href="localhost:8085/" class="h4" th:text="555555555555555555555">这是一段用于测试的短语,无任何含义.</a>
-            </div>
-        </div>
+        <!--<div class="article">-->
+            <!--<div class="articleTitle">-->
+                <!--<a href="localhost:8085/" class="h3">1234567</a>-->
+            <!--</div>-->
+            <!--<div class="articleContent">-->
+                <!--<a href="localhost:8085/" class="h4" th:text="555555555555555555555">这是一段用于测试的短语,无任何含义.</a>-->
+            <!--</div>-->
+        <!--</div>-->
 
         <div th:each="article,aritcleStat : ${articleList}">
             <div class="article">
                 <div class="articleTitle">
-                    <a th:text="${article.articleTitle}" th:href="@{${article.articleUrl}}">testText</a>
-                    <small th:text="${article.articleContentSub}">test...</small>
+                    <a class="h2" th:text="${article.articleTitle}" th:href="@{${article.articleUrl}}"></a>
+                    <small th:text="${article.articleContentSub}"></small>
                 </div>
                 <div class="articleContent">
                     <span th:text="${article.articleContent}">这是一段用于测试的短语,无任何含义.</span>
@@ -95,34 +104,44 @@
 
     <!-- 右侧信息 -->
     <div class="menuRight">
-        <div id="myCarousel" class="carousel slide">
-            <!-- 轮播（Carousel）指标 -->
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-            <!-- 轮播（Carousel）项目 -->
-            <div class="carousel-inner">
-                <div class="item active">
-                    <img src="/img/east.jpg" alt="First slide" />
-                </div>
-                <div class="item">
-                    <img src="/img/east2.jpg" alt="Second slide" />
-                </div>
-                <div class="item">
-                    <img src="/img/03.jpg" alt="Third slide" />
-                </div>
+        <!--<div id="myCarousel" class="carousel slide">-->
+            <!--&lt;!&ndash; 轮播（Carousel）指标 &ndash;&gt;-->
+            <!--<ol class="carousel-indicators">-->
+                <!--<li data-target="#myCarousel" data-slide-to="0" class="active"></li>-->
+                <!--<li data-target="#myCarousel" data-slide-to="1"></li>-->
+                <!--<li data-target="#myCarousel" data-slide-to="2"></li>-->
+            <!--</ol>-->
+            <!--&lt;!&ndash; 轮播（Carousel）项目 &ndash;&gt;-->
+            <!--<div class="carousel-inner">-->
+                <!--<div class="item active">-->
+                    <!--<img src="/img/east.jpg" alt="First slide" class="carousel-inner-img"/>-->
+                <!--</div>-->
+                <!--<div class="item">-->
+                    <!--<img src="/img/east2.jpg" alt="Second slide" class="carousel-inner-img"/>-->
+                <!--</div>-->
+                <!--<div class="item">-->
+                    <!--<img src="/img/03.jpg" alt="Third slide" class="carousel-inner-img"/>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; 轮播（Carousel）导航 &ndash;&gt;-->
+            <!--<a class="carousel-control left" href="#myCarousel"-->
+               <!--data-slide="prev">&lsaquo;-->
+            <!--</a>-->
+            <!--<a class="carousel-control right" href="#myCarousel"-->
+               <!--data-slide="next">&rsaquo;-->
+            <!--</a>-->
+        <!--</div>-->
+        <div class="carouselArea">
+            <div id="featured">
+                <img src="/img/east.jpg" data-caption="#htmlCaption1" />
+                <img src="/img/east2.jpg" data-caption="#htmlCaption2" />
+                <img src="/img/03.jpg" data-caption="#htmlCaption3" />
             </div>
-            <!-- 轮播（Carousel）导航 -->
-            <a class="carousel-control left" href="#myCarousel"
-               data-slide="prev">&lsaquo;
-            </a>
-            <a class="carousel-control right" href="#myCarousel"
-               data-slide="next">&rsaquo;
-            </a>
+            <!-- Captions for Orbit -->
+            <span class="orbit-caption" id="htmlCaption1"><strong>1</strong></span>
+            <span class="orbit-caption" id="htmlCaption2"><strong>2</strong></span>
+            <span class="orbit-caption" id="htmlCaption3"><strong>3</strong></span>
         </div>
-
         <div>
             <h4>告示板</h4><br />
             <span>这是一段用于测试的短语,无任何含义.这是一段用于测试的短语,无任何含义.</span>
@@ -166,6 +185,7 @@
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.orbit-1.3.0.js"></script>
 <!--<script src="/js/alertTip.js"></script>-->
 <!--<script>-->
     <!--$(function(){-->
@@ -184,6 +204,17 @@
 <!--</script>-->
 <script>
     $(function () {
+        $('#featured').orbit({
+            advanceSpeed: 4000,//图片切换时间
+            //timer:false,       //是否启动开始暂停功能
+            //animation: 'fade', //动画效果：有fade（淡入）, horizontal-slide（垂直滑动）, vertical-slide（水平滑动）, horizontal-push, vertical-push
+            //captions: false,    //是否启用标题
+            //captionAnimation: 'slideOpen',  //标题动画
+            directionalNav: false,//是否启用上一页、下一页功能
+        });
+    });
+    $(function () {
+
         $("#callAuthor").click(function () {
             jQuery.alertWindow("修改成功");
         });
