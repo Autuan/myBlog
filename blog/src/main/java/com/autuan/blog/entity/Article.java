@@ -25,6 +25,16 @@ public class Article {
 
     private Integer labelId;
 
+    private Integer articleStatus;
+
+    public Integer getArticleStatus() {
+        return articleStatus;
+    }
+
+    public void setArticleStatus(Integer articleStatus) {
+        this.articleStatus = articleStatus;
+    }
+
     public Integer getArticleId() {
         return articleId;
     }

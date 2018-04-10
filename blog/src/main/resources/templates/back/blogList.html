@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>博客列表</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-table.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.css">
+    <style>
+        .table-btn{
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body class="app sidebar-mini rtl">
+<div th:include="managerCommon :: ManagerCommon"></div>
+<main class="app-content">
+    <div th:include="managerCommon :: contentTitle"></div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <table id="blogTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+<!-- Essential javascripts for application to work-->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/bootstrap-table.min.js"></script>
+<script src="/js/bootstrap-table-zh-CN.min.js"></script>
+<script>
+    function roleSubmit(){
+        var id = $("#FormRoleId").val();
+        // ==0 添加
+        if (id == 0) {
+            var url = "/insertNewTeam";
+            var data = $("#roleForm").serialize();
+            console.log(data);
+            var callback = function(obj){
+                location = "localhost:8082";
+            };
+            $.post(url,data,callback,"text");
+
+            // !=0 修改
+        } else {
+            var url = "/updateTeam";
+            var data = $("#roleForm").serialize();
+            var callback = function(obj){
+                location = "localhost:8082";
+            };
+            console.log(data);
+            $.post(url,data,callback,"text");
+        }
+    }
+    function operateFormatter(value, row, index) {
+        return [
+            '<button type="button" class="ButtonA btn btn-info btn-sm table-btn" style="margin-right:15px;">修改</button>',
+            '<button type="button" class="ButtonB btn btn-danger btn-sm table-btn" style="margin-right:15px;">删除</button>'
+        ].join('');
+    };
+    function articleUrlFormatter(value,row,index) {
+        return "<a href='"+value+"'>查看</a>";
+    }
+    window.operateEvents = {
+        'click .ButtonA': function (e, value, row, index) {
+            console.log(row);
+            window.location.href = "localhost:8009/article/1";
+            return false;
+        },
+        'click .ButtonB': function (e, value, row, index) {
+            var url = "";
+            var callback = function(obj) {
+                console.log(obj);
+            }
+            $.post(url,callback,"json");
+        }
+    };
+    $(function(){
+        $('#blogTable').bootstrapTable('destroy').bootstrapTable({
+            url: '/back/getArticleList',   //url一般是请求后台的url地址,调用ajax获取数据。此处我用本地的json数据来填充表格。
+            method: "get",                     //使用get请求到服务器获取数据
+            dataType: "json",
+            contentType: 'application/json,charset=utf-8',
+            toolbar: "#toolbar",                //一个jQuery 选择器，指明自定义的toolbar 例如:#toolbar, .toolbar.
+            uniqueId: "id",                    //每一行的唯一标识，一般为主键列
+            height: document.body.clientHeight-165,   //动态获取高度值，可以使表格自适应页面
+            cache: false,                       // 不缓存
+            striped: true,                      // 隔行加亮
+            //       queryParamsType: "limit",           //设置为"undefined",可以获取pageNumber，pageSize，searchText，sortName，sortOrder
+            //设置为"limit",符合 RESTFul 格式的参数,可以获取limit, offset, search, sort, order
+            //       queryParams: queryParams,
+            sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+            // sortable: true,                     //是否启用排序;意味着整个表格都会排序
+            sortName: 'uid',                    // 设置默认排序为 name
+            sortOrder: "asc",                   //排序方式
+            pagination: true,                   //是否显示分页（*）
+            search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+            strictSearch: true,
+            showColumns: true,                  //是否显示所有的列
+        //    showRefresh: true,                  //是否显示刷新按钮
+        //    showToggle:true,                    //是否显示详细视图和列表视图
+           clickToSelect: true,                //是否启用点击选中行
+            minimumCountColumns: 2,          //最少允许的列数 clickToSelect: true, //是否启用点击选中行
+            pageNumber: 1,                   //初始化加载第一页，默认第一页
+            pageSize: 5,                    //每页的记录行数（*）
+            pageList: [5, 10, 20],     //可供选择的每页的行数（*）
+            paginationPreText: "Previous",
+            paginationNextText: "Next",
+            paginationFirstText: "First",
+            paginationLastText: "Last",
+            //     responseHandler: responseHandler,
+            columns: [{
+                field: 'articleId',
+                title: 'id'
+            },{
+                field: 'articleTitle',
+                title: '标题'
+            },{
+                field: 'labelId',
+                title: '分类'
+            },{
+                field: 'articleContentSub',
+                title: '简略'
+            },{
+                field: 'articlePublishTime',
+                title: '发布时间'
+            },{
+                field: 'articleAlertTime',
+                title: '修改时间'
+            },{
+                field: 'articleHot',
+                title: '热点信息'
+            },{
+                field: 'articleCountView',
+                title: '浏览数'
+            },{
+                field: 'articleUrl',
+                title: '查看',
+                formatter: articleUrlFormatter
+            },{
+                field: 'operate',
+                title: '操作',
+                width: '80px',
+                events: operateEvents,
+                formatter: operateFormatter
+            }, ],
+            onLoadSuccess: function (data) { //加载成功时执行
+                console.log(data);
+            },
+            onLoadError: function (res) { //加载失败时执行
+                console.log(res);
+            }
+        });
+
+
+    });
+
+</script>
+</body>
+</html>

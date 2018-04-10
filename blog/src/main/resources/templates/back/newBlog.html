@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="app sidebar-mini rtl">
+<div th:include="managerCommon :: ManagerCommon"></div>
+<main class="app-content">
+    <div th:include="managerCommon :: contentTitle"></div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+                    <div>
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="articleTitle" class="col-sm-2 control-label">标题</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="articleTitle" placeholder="请输入标题">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="articleContentSub" class="col-sm-2 control-label">内容简介</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="articleContentSub" placeholder="内容简介,非必填">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="articleHot" class="col-sm-2 control-label">articleHot</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="articleHot" placeholder="articleHot">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="labelId" class="col-sm-2 control-label">labelId</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="labelId" placeholder="labelId">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <div id="editorArea">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="button" id="publishBtn" class="btn btn-success">发布</button>
+                                    <button type="button" class="btn btn-success">定时发布</button>
+                                    <button type="button" class="btn btn-info">存为草稿</button>
+                                    <button type="button" class="btn btn-info">撤消</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+<!-- Essential javascripts for application to work-->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/wangEditor.min.js"></script>
+<script>
+    var E = window.wangEditor;
+
+    var editor1 = new E('#editorArea');
+    editor1.create();
+    
+    $(function () {
+        $("#publishBtn").click(function () {
+            var content =editor1.txt.html();
+            var url = "localhost:8009/upload/file";
+            var data = {
+                uploadFile:content
+            }
+            $.post(url,data,function (obj) {
+                console.log(obj);
+            },"json");
+        });
+    })
+</script>
+</body>
+</html>

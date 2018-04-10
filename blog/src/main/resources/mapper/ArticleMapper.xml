@@ -14,11 +14,12 @@
     <result column="article_hot" property="articleHot" jdbcType="INTEGER" />
     <result column="article_url" property="articleUrl" jdbcType="VARCHAR" />
     <result column="label_id" property="labelId" jdbcType="INTEGER" />
+    <result column="article_status" property="articleStatus" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     article_id, article_title, article_content, article_content_sub, article_content_sub_link, 
     article_publish_time, article_alert_time, article_count_view, article_count_agree, 
-    article_hot, article_url, label_id
+    article_hot, article_url, label_id, article_status
   </sql>
 
   <select id="getArticleList" resultMap="BaseResultMap">
@@ -41,13 +42,13 @@
     insert into article (article_id, article_title, article_content, 
       article_content_sub, article_content_sub_link, 
       article_publish_time, article_alert_time, article_count_view, 
-      article_count_agree, article_hot, article_url, 
-      label_id)
+      article_count_agree, article_hot, article_url,
+      label_id,article_status)
     values (#{articleId,jdbcType=INTEGER}, #{articleTitle,jdbcType=VARCHAR}, #{articleContent,jdbcType=VARCHAR}, 
       #{articleContentSub,jdbcType=VARCHAR}, #{articleContentSubLink,jdbcType=VARCHAR}, 
       #{articlePublishTime,jdbcType=VARCHAR}, #{articleAlertTime,jdbcType=VARCHAR}, #{articleCountView,jdbcType=INTEGER}, 
       #{articleCountAgree,jdbcType=INTEGER}, #{articleHot,jdbcType=INTEGER}, #{articleUrl,jdbcType=VARCHAR}, 
-      #{labelId,jdbcType=INTEGER})
+      #{labelId,jdbcType=INTEGER},#{articleStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.autuan.blog.entity.Article" >
     insert into article
@@ -88,6 +89,9 @@
       <if test="labelId != null" >
         label_id,
       </if>
+      <if test="articleStatus != null" >
+        article_status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="articleId != null" >
@@ -125,6 +129,9 @@
       </if>
       <if test="labelId != null" >
         #{labelId,jdbcType=INTEGER},
+      </if>
+      <if test="articleStatus != null" >
+        #{articleStatus,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -164,6 +171,9 @@
       <if test="labelId != null" >
         label_id = #{labelId,jdbcType=INTEGER},
       </if>
+      <if test="articleStatus != null" >
+        article_status = #{article_status,jdbcType=INTEGER},
+      </if>
     </set>
     where article_id = #{articleId,jdbcType=INTEGER}
   </update>
@@ -180,6 +190,7 @@
       article_hot = #{articleHot,jdbcType=INTEGER},
       article_url = #{articleUrl,jdbcType=VARCHAR},
       label_id = #{labelId,jdbcType=INTEGER}
+      article_status = #{articleStatus,jdbcType=INTEGER}
     where article_id = #{articleId,jdbcType=INTEGER}
   </update>
 </mapper>
