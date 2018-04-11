@@ -5,11 +5,16 @@ import com.autuan.blog.util.IDUtils;
 import com.autuan.blog.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RequestMapping("/upload")
@@ -30,8 +35,15 @@ public class FTPController {
     private String IMAGE_BASE_URL;
 
     // ========================= 业务处理 =========================
+
+    /**
+     * wangeditor 图片上传
+     * @param uploadFile
+     * @return
+     */
     @RequestMapping("/file")
-    public String fileUpload(MultipartFile uploadFile) {
+    @ResponseBody
+    public String fileUpload( MultipartFile uploadFile) {
         Map resultMap = new HashMap<>(16);
         try {
             // 生成一个新的文件名
@@ -47,11 +59,13 @@ public class FTPController {
                     FTP_PASSWORD,FTP_BASE_PATH,imagePath,newName,uploadFile.getInputStream());
             // 返回结果
             if (!result) {
-                resultMap.put("error",1);
+                resultMap.put("errno",1);
                 resultMap.put("message","File Upload Fail");
             } else {
-                resultMap.put("error",0);
-                resultMap.put( "url",IMAGE_BASE_URL + imagePath + "/" + newName );
+                resultMap.put("errno",0);
+                List<String> data = new ArrayList<String>(4);
+                data.add(IMAGE_BASE_URL + imagePath + "/" + newName);
+                resultMap.put( "data",data );
             }
         } catch (Exception e) {
             e.printStackTrace();
