@@ -20,7 +20,23 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Article getArticleById(Integer articleId) {
+    public Article getArticleById(String articleId) {
         return articleMapper.selectByPrimaryKey(articleId);
+    }
+
+    @Override
+    public int insertArticle(Article article) {
+        return articleMapper.insertSelective(article);
+    }
+
+    @Override
+    public boolean updateArticleById(Article article) {
+        int i = articleMapper.updateByPrimaryKeySelective(article);
+        return i>0;
+    }
+
+    @Override
+    public List<Article> getHotArticleList() {
+        return articleMapper.getHotArticleList();
     }
 }

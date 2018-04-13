@@ -9,17 +9,19 @@ import java.util.List;
 @Repository
 @Mapper
 public interface ArticleMapper {
-    int deleteByPrimaryKey(Integer articleId);
+    int deleteByPrimaryKey(String articleId);
 
     int insert(Article record);
 
     int insertSelective(Article record);
 
-    Article selectByPrimaryKey(Integer articleId);
+    Article selectByPrimaryKey(String articleId);
 
     int updateByPrimaryKeySelective(Article record);
 
     int updateByPrimaryKey(Article record);
 
     List<Article> getArticleList();
+
+    List<Article> getHotArticleList();
 }

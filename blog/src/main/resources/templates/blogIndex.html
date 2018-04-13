@@ -60,42 +60,27 @@
 <div class="container">
     <!-- 左侧目录 -->
     <div class="menuLeft">
-        <!--<div class="article">-->
-            <!--<div class="articleTitle">-->
-                <!--<h3>123456789<small>&nbsp;2018.03.04 10:05:02 view:5</small></h3>-->
-            <!--</div>-->
-            <!--<div class="articleContent">-->
-                <!--<small>123456789123456789</small>-->
-            <!--</div>-->
-        <!--</div>-->
+        <div th:each="hotArticle,aritcleStat : ${hotList}">
+            <div class="article">
+                <div class="articleTitle">
+                    <a class="h2" th:text="'[顶]'+${hotArticle.articleTitle}" th:href="@{${hotArticle.articleUrl}}"></a>
+                    <small th:text="${hotArticle.articleAlertTime}"></small>
+                </div>
+                <div class="articleContent">
+                    <span th:text="${hotArticle.articleContentSub}"></span>
+                </div>
 
-        <!--<div class="article">-->
-            <!--<div class="articleTitle">-->
-                <!--<h3>123456789<small>&nbsp;2018.03.04 10:05:02 view:5</small></h3>-->
-            <!--</div>-->
-            <!--<div class="articleContent">-->
-                <!--<small>123456789123456789</small>-->
-            <!--</div>-->
-        <!--</div>-->
-
-
-        <!--<div class="article">-->
-            <!--<div class="articleTitle">-->
-                <!--<a href="localhost:8085/" class="h3">1234567</a>-->
-            <!--</div>-->
-            <!--<div class="articleContent">-->
-                <!--<a href="localhost:8085/" class="h4" th:text="555555555555555555555">这是一段用于测试的短语,无任何含义.</a>-->
-            <!--</div>-->
-        <!--</div>-->
+            </div>
+        </div>
 
         <div th:each="article,aritcleStat : ${articleList}">
             <div class="article">
                 <div class="articleTitle">
                     <a class="h2" th:text="${article.articleTitle}" th:href="@{${article.articleUrl}}"></a>
-                    <small th:text="${article.articleContentSub}"></small>
+                    <small th:text="${article.articleAlertTime}"></small>
                 </div>
                 <div class="articleContent">
-                    <span th:text="${article.articleContent}">这是一段用于测试的短语,无任何含义.</span>
+                    <span th:text="${article.articleContentSub}"></span>
                 </div>
 
             </div>

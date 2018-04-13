@@ -6,6 +6,11 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .chooseTitle{
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body class="app sidebar-mini rtl">
 <div th:include="managerCommon :: ManagerCommon"></div>
@@ -17,36 +22,45 @@
             <div class="tile">
                 <div class="tile-body">
                     <div>
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" id="articleForm">
                             <div class="form-group">
                                 <label for="articleTitle" class="col-sm-2 control-label">标题</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="articleTitle" placeholder="请输入标题">
+                                    <input type="text" class="form-control" name="articleTitle" id="articleTitle" placeholder="请输入标题">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="articleContentSub" class="col-sm-2 control-label">内容简介</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="articleContentSub" placeholder="内容简介,非必填">
+                                    <input type="text" class="form-control" name="articleContentSub" id="articleContentSub" placeholder="内容简介,非必填">
+                                </div>
+                                <input type="hidden" name="articleContent" id="articleContent">
+                            </div>
+                            <div class="form-group">
+                                <label for="articleHot" class="col-sm-2 control-label">是否置顶</label>
+                                <div class="col-sm-4">
+                                    <!--<input type="radio" class="form-control" name="articleHot" id="articleHot" value="1">是-->
+                                    <!--<input type="radio" class="form-control" name="articleHot" value="0" checked="checked">否-->
+                                    <div class="form-control" id="articleHot">
+                                        <label class="radio-inline chooseTitle">
+                                            <input type="radio" name="articleHot" id="inlineRadio1" value="1"> 是
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="articleHot" id="inlineRadio2" value="0"> 否
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="articleHot" class="col-sm-2 control-label">articleHot</label>
-                                <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="articleHot" placeholder="articleHot">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="labelId" class="col-sm-2 control-label">labelId</label>
-                                <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="labelId" placeholder="labelId">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-                                <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                <label for="labelId" class="col-sm-2 control-label">分类</label>
+                                <div class="col-sm-4">
+                                <!--<span class="chooseTitle">分类</span>-->
+                                    <select id="labelId" class="form-control">
+                                        <option name="labelId" value="1">技术感悟</option>
+                                        <option name="labelId" value="2">生活随想</option>
+                                        <option name="labelId" value="3">前沿动态</option>
+                                        <option name="labelId" value="4">大虾说</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -59,9 +73,9 @@
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <button type="button" id="publishBtn" class="btn btn-success">发布</button>
-                                    <button type="button" class="btn btn-success">定时发布</button>
-                                    <button type="button" class="btn btn-info">存为草稿</button>
-                                    <button type="button" class="btn btn-info">撤消</button>
+                                    <button type="button" class="btn btn-success" disabled="disabled">定时发布</button>
+                                    <button type="button" class="btn btn-info" disabled="disabled">存为草稿</button>
+                                    <button type="button" class="btn btn-info" disabled="disabled">撤消</button>
                                 </div>
 
                             </div>
@@ -114,14 +128,15 @@
     $(function () {
         $("#publishBtn").click(function () {
             var content =editor1.txt.html();
+            $("#articleContent").val(content);
+
             console.log(content);
-//            var url = "localhost:8009/upload/file";
-//            var data = {
-//                uploadFile:content
-//            }
-//            $.post(url,data,function (obj) {
-//                console.log(obj);
-//            },"json");
+            var url = "/article/insertArticle";
+            var data = $("#articleForm").serialize();
+            console.log(url);
+            $.post(url,data,function (obj) {
+                console.log(obj);
+            },"text");
         });
     })
 </script>

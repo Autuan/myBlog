@@ -1,7 +1,7 @@
 package com.autuan.blog.entity;
 
 public class Article {
-    private Integer articleId;
+    private String articleId;
 
     private String articleTitle;
 
@@ -35,11 +35,11 @@ public class Article {
         this.articleStatus = articleStatus;
     }
 
-    public Integer getArticleId() {
+    public String getArticleId() {
         return articleId;
     }
 
-    public void setArticleId(Integer articleId) {
+    public void setArticleId(String articleId) {
         this.articleId = articleId;
     }
 

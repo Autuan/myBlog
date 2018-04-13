@@ -22,8 +22,11 @@ public class ShowController {
     public ModelAndView toIndex(ModelAndView mav){
         // 取文章列表
         List<Article> articles = articleService.getArticleList();
+        // 取热点列表（置顶）
+        List<Article> hotArticles = articleService.getHotArticleList();
         //
         mav.addObject("articleList",articles);
+        mav.addObject("hotList",hotArticles);
         mav.addObject("tempFile","tempFile.html");
         mav.setViewName("blogIndex");
         return mav;
