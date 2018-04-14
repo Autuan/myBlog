@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.autuan.blog.mapper.SearchMapper" >
+    <select id="selectSearchItem" resultType="com.autuan.blog.entity.SearchItem">
+        SELECT
+        a.article_id articleId,
+        a.article_title articleTitle,
+        a.article_content_sub articleContentSub,
+        a.article_publish_time articlePublishTime,
+        a.article_alert_time articleAlertTime,
+        a.article_url articleUrl,
+        l.label_value labelName
+        FROM
+        article a
+        LEFT JOIN label l
+        ON a.label_id = l.label_id
+    </select>
+</mapper>

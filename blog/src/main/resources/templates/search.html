@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
-    <title>Title</title>
+    <title th:text="'搜索:'+${query}"></title>
     <link rel="stylesheet" href="/css/bootstrap.css"/>
     <link rel="stylesheet" href="/css/bootstrap-theme.css"/>
     <link rel="stylesheet" href="/css/forIndex.css" />
@@ -29,58 +29,20 @@
 </head>
 
 <body>
-<!-- 头部 (应该导入) -->
-<!--<nav class="navbar navbar-static-top navbar-default">-->
-    <!--<div class="container">-->
-        <!--<div class="navbar-header">-->
-            <!--<a class="navbar-brand" href="http://10.1.54.67:8082">-->
-                <!--<img src="img/logo-h-word.png" />-->
-            <!--</a>-->
-        <!--</div>-->
-        <!--<div id="navbar" class="navbar-collapse collapse">-->
-            <!--<form class="navbar-form navbar-right" id="logForm">-->
-                <!--<div class="form-group">-->
-                    <!--<input type="text" placeholder="用户名" class="form-control" name="username" />-->
-                <!--</div>-->
-                <!--<div class="form-group">-->
-                    <!--<input type="password" placeholder="密码" class="form-control" name="password" />-->
-                <!--</div>-->
-                <!--<button type="submit" class="btn btn-success">登陆</button>-->
-                <!--<button type="button" class="btn btn-info">注册</button>-->
-            <!--</form>-->
-        <!--</div>&lt;!&ndash;/.navbar-collapse &ndash;&gt;-->
-    <!--</div>-->
-<!--</nav>-->
-
-<!-- 头部 over-->
 
 <div th:include="head"></div>
 
 <!-- 主体 over -->
 <div class="container">
-    <!-- 左侧目录 -->
-    <div class="menuLeft">
-        <div th:each="hotArticle,aritcleStat : ${hotList}">
+
+        <div th:each="item,itemStat : ${itemList}">
             <div class="article">
                 <div class="articleTitle">
-                    <a class="h2" th:text="'[顶]'+${hotArticle.articleTitle}" th:href="@{${hotArticle.articleUrl}}"></a>
-                    <small th:text="${hotArticle.articleAlertTime}"></small>
+                    <a class="h2" th:text="${item.articleTitle}" th:href="@{'/article/'+${item.articleId}}"></a>
+                    <small th:text="${item.articleAlertTime}"></small>
                 </div>
                 <div class="articleContent">
-                    <span th:text="${hotArticle.articleContentSub}"></span>
-                </div>
-
-            </div>
-        </div>
-
-        <div th:each="article,aritcleStat : ${articleList}">
-            <div class="article">
-                <div class="articleTitle">
-                    <a class="h2" th:text="${article.articleTitle}" th:href="@{${article.articleUrl}}"></a>
-                    <small th:text="${article.articleAlertTime}"></small>
-                </div>
-                <div class="articleContent">
-                    <span th:text="${article.articleContentSub}"></span>
+                    <span th:text="${item.articleContentSub}"></span>
                 </div>
 
             </div>
@@ -259,18 +221,6 @@
 //            });
         });
     })
-</script>
-
-<!-- 搜索功能块 -->
-<script>
-    function search() {
-        var query = $("#searchKey").val();
-        var page = $("#page").val()
-        if ( page == null ) {
-            page = 1;
-        }
-        location = "localhost:8009/search?q="+query+"&page="+page;
-    }
 </script>
 </body>
 </html>

@@ -40,6 +40,11 @@
 			<artifactId>spring-boot-starter-web-services</artifactId>
 		</dependency>
 
+		<!-- solr -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-solr</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
