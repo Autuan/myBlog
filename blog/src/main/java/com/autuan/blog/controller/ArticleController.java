@@ -1,15 +1,16 @@
 package com.autuan.blog.controller;
 
 import com.autuan.blog.entity.Article;
+import com.autuan.blog.entity.PageArticle;
+import com.autuan.blog.entity.SearchResult;
 import com.autuan.blog.service.ArticleService;
 import com.autuan.blog.util.WebUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -30,9 +31,15 @@ public class ArticleController {
      */
     @RequestMapping("/getArticleList")
     @ResponseBody
-    public List<Article> getArticleList(){
+    public PageArticle getArticleList(@RequestParam(defaultValue = "1",value = "pageNumber") Integer page,
+                                      @RequestParam(value = "pageSize") Integer rows){
+        PageArticle pageArticle = new PageArticle();
+        PageHelper.startPage(page,rows);
         List<Article> articles = articleService.getArticleList();
-        return articles;
+        pageArticle.setRows(articles);
+        PageInfo<Article> pageInfo = new PageInfo<>(articles);
+        pageArticle.setTotal((int) pageInfo.getTotal());
+        return pageArticle;
     }
 
     @RequestMapping("/article/{articleId}")

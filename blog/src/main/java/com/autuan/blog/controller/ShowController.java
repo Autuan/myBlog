@@ -1,14 +1,14 @@
 package com.autuan.blog.controller;
 
 import com.autuan.blog.entity.Article;
+import com.autuan.blog.entity.PageArticle;
 import com.autuan.blog.service.ArticleService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -19,14 +19,25 @@ public class ShowController {
     private ArticleService articleService;
 
     @RequestMapping("/")
-    public ModelAndView toIndex(ModelAndView mav){
-        // 取文章列表
-        List<Article> articles = articleService.getArticleList();
+    public ModelAndView toIndex(@RequestParam(defaultValue = "1",value = "pageNumber") Integer page,
+                                @RequestParam(defaultValue = "5",value = "pageSize") Integer rows,ModelAndView mav){
+
+
         // 取热点列表（置顶）
         List<Article> hotArticles = articleService.getHotArticleList();
         //
+        PageHelper.startPage(page,rows);
+        // 取文章列表
+        List<Article> articles = articleService.getArticleList();
+        PageInfo<Article> pageInfo = new PageInfo<>(articles);
+
+        String s = String.valueOf(pageInfo.getTotal());
+        System.out.println("s is " + s);
         mav.addObject("articleList",articles);
         mav.addObject("hotList",hotArticles);
+        mav.addObject("currentPage",page);
+        mav.addObject("totalCounts",s);
+        mav.addObject("pageSize","5");
         mav.addObject("tempFile","tempFile.html");
         mav.setViewName("blogIndex");
         return mav;

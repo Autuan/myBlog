@@ -61,6 +61,15 @@
             $.post(url,data,callback,"text");
         }
     }
+    function queryParams(params){
+        console.log(params);
+        return{
+            //每页多少条数据
+            rows: params.limit,
+            //请求第几页
+            page:params.pageNumber,
+        }
+    }
     function operateFormatter(value, row, index) {
         return [
             '<button type="button" class="ButtonA btn btn-info btn-sm table-btn" style="margin-right:15px;">修改</button>',
@@ -86,7 +95,7 @@
     };
     $(function(){
         $('#blogTable').bootstrapTable('destroy').bootstrapTable({
-            url: '/back/getArticleList',   //url一般是请求后台的url地址,调用ajax获取数据。此处我用本地的json数据来填充表格。
+            url: '/getArticleList',   //url一般是请求后台的url地址,调用ajax获取数据。此处我用本地的json数据来填充表格。
             method: "get",                     //使用get请求到服务器获取数据
             dataType: "json",
             contentType: 'application/json,charset=utf-8',
@@ -95,10 +104,13 @@
             height: document.body.clientHeight-165,   //动态获取高度值，可以使表格自适应页面
             cache: false,                       // 不缓存
             striped: true,                      // 隔行加亮
-            //       queryParamsType: "limit",           //设置为"undefined",可以获取pageNumber，pageSize，searchText，sortName，sortOrder
+
+            //设置为"undefined",可以获取pageNumber，pageSize，searchText，sortName，sortOrder
             //设置为"limit",符合 RESTFul 格式的参数,可以获取limit, offset, search, sort, order
-            //       queryParams: queryParams,
-            sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+            //设置为 '' 在这种情况下传给服务器的参数为：pageSize,pageNumber
+            queryParamsType: '',
+            //queryParams: queryParams,
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
             // sortable: true,                     //是否启用排序;意味着整个表格都会排序
             sortName: 'uid',                    // 设置默认排序为 name
             sortOrder: "asc",                   //排序方式
