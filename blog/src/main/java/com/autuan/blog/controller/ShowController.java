@@ -31,12 +31,16 @@ public class ShowController {
         List<Article> articles = articleService.getArticleList();
         PageInfo<Article> pageInfo = new PageInfo<>(articles);
 
-        String s = String.valueOf(pageInfo.getTotal());
-        System.out.println("s is " + s);
+        int totalCounts = (int) pageInfo.getTotal();
+
+        int totalPages = totalCounts/rows;
+        totalPages += totalCounts%rows==0 ? 0 : 1;
+
         mav.addObject("articleList",articles);
         mav.addObject("hotList",hotArticles);
+
         mav.addObject("currentPage",page);
-        mav.addObject("totalCounts",s);
+        mav.addObject("totalPages",totalPages);
         mav.addObject("pageSize","5");
         mav.addObject("tempFile","tempFile.html");
         mav.setViewName("blogIndex");
