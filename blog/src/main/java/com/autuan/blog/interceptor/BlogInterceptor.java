@@ -11,23 +11,30 @@ import javax.servlet.http.HttpSession;
 public class BlogInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+        System.out.println("-------------拦截器");
         // 取 session
         HttpSession session = httpServletRequest.getSession();
         // 取 cookie
         Cookie[] cookies = httpServletRequest.getCookies();
         // 没 cookie 直接返回 false
         if (cookies == null || cookies.length == 0) {
+            httpServletResponse.sendRedirect("/login/toLogin");
             return false;
         }
         for (Cookie cookie : cookies) {
             // 验证成功
             if (cookie.getName().equals("autuanBlog")) {
+               String s = (String) session.getAttribute("autuanBlog");
+               if(cookie.getValue().equals(s)) {
                 // 重置 服务器 用户过期时间
-                session.setMaxInactiveInterval(65);
+                session.setMaxInactiveInterval(60);
                 // 返回 结果
                 return true;
+               }
             }
         }
+        //httpServletRequest.getRequestDispatcher("page-login").forward(httpServletRequest, httpServletResponse);
+        httpServletResponse.sendRedirect("/login/toLogin");
         return false;
     }
 

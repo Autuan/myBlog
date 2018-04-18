@@ -3,6 +3,7 @@ package com.autuan.blog.controller;
 import com.autuan.blog.entity.LoginTable;
 import com.autuan.blog.service.LoginService;
 import com.autuan.blog.util.LoginUtil;
+import com.autuan.blog.util.WebUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,11 +54,12 @@ public class LoginController {
         // 执行登陆成功指令
         // 丨→保存 session 在服务器
             HttpSession session = request.getSession();
-            session.setAttribute(loginTable.getLoginName(),loginTable);
+            session.setAttribute("autuanBlog", WebUtil.getCurrentTimeNoMark());
             // 时间设置
             session.setMaxInactiveInterval(60);
         } else {
             map.put("result","success");
+            map.put("describe",WebUtil.getCurrentTimeNoMark());
         }
         return map;
     }
@@ -130,6 +132,6 @@ public class LoginController {
     // 跳转登陆页方法,test使用
     @RequestMapping("/toLogin")
     public String toLogin(){
-        return "tempFile";
+        return "page-login";
     }
 }

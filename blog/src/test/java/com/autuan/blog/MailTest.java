@@ -5,10 +5,12 @@ import com.autuan.blog.util.EmailUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestComponent;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
 //@RunWith(SpringRunner.class)
+@TestComponent
 public class MailTest {
   ErrorController errorController = new ErrorController();
 
