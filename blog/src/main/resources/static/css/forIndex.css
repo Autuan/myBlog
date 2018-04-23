@@ -1,8 +1,8 @@
 .videoBloack,.glyphicon-thumbs-up,.commentReturn,.glyphicon-thumbs-down,.personInfo,.personImg:hover{
-		    cursor:pointer
+		    cursor:pointer;
 }
 
-// 评论区css
+/* 评论区css*/
 .glyphicon-thumbs-up {
 	margin-left: 5px;
 }
@@ -45,7 +45,7 @@
 .personInfo{
 	margin-bottom: 2px;
 }
-// 评论区over
+/*// 评论区over*/
 
 /*.demo{width:95%;margin:50px auto 10px auto;padding:10px;}*/
 .navbar-header img{

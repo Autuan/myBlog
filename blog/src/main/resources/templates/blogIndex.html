@@ -18,6 +18,7 @@
         }
         .menuLeft{
             float: left;
+            width:550px;
         }
         .carouselArea img{
             width:400px;
@@ -25,6 +26,13 @@
         }
         .article {
             margin-bottom: 30px;
+        }
+        .aritcleImage{
+            width:150px;
+            height:150px;
+        }
+        .media-left{
+            float: left;
         }
     </style>
 </head>
@@ -75,15 +83,24 @@
         </div>
 
         <div th:each="article,aritcleStat : ${articleList}">
-            <div class="article">
-                <div class="articleTitle">
-                    <a class="h2" th:text="${article.articleTitle}" th:href="@{${article.articleUrl}}"></a>
-                    <small th:text="${article.articleAlertTime}"></small>
-                </div>
+            <div class="media article">
+
+            <div class="media-body">
+                    <div class="media-left" th:unless="${#lists.isEmpty(article.articleContentSubLink)}">
+                        <a th:href="@{${article.articleUrl}}">
+                            <img class="aritcleImage" th:src="@{${article.articleContentSubLink}}" />
+                        </a>
+                    </div>
+                    <a class="h2 media-heading" th:text="${article.articleTitle}"
+                       th:href="@{${article.articleUrl}}">
+                        <small th:text="${article.articleAlertTime}"></small>
+                    </a>
+
                 <div class="articleContent">
                     <span th:text="${article.articleContentSub}"></span>
                 </div>
 
+            </div>
             </div>
         </div>
 
@@ -117,33 +134,6 @@
 
     <!-- 右侧信息 -->
     <div class="menuRight">
-        <!--<div id="myCarousel" class="carousel slide">-->
-            <!--&lt;!&ndash; 轮播（Carousel）指标 &ndash;&gt;-->
-            <!--<ol class="carousel-indicators">-->
-                <!--<li data-target="#myCarousel" data-slide-to="0" class="active"></li>-->
-                <!--<li data-target="#myCarousel" data-slide-to="1"></li>-->
-                <!--<li data-target="#myCarousel" data-slide-to="2"></li>-->
-            <!--</ol>-->
-            <!--&lt;!&ndash; 轮播（Carousel）项目 &ndash;&gt;-->
-            <!--<div class="carousel-inner">-->
-                <!--<div class="item active">-->
-                    <!--<img src="/img/east.jpg" alt="First slide" class="carousel-inner-img"/>-->
-                <!--</div>-->
-                <!--<div class="item">-->
-                    <!--<img src="/img/east2.jpg" alt="Second slide" class="carousel-inner-img"/>-->
-                <!--</div>-->
-                <!--<div class="item">-->
-                    <!--<img src="/img/03.jpg" alt="Third slide" class="carousel-inner-img"/>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--&lt;!&ndash; 轮播（Carousel）导航 &ndash;&gt;-->
-            <!--<a class="carousel-control left" href="#myCarousel"-->
-               <!--data-slide="prev">&lsaquo;-->
-            <!--</a>-->
-            <!--<a class="carousel-control right" href="#myCarousel"-->
-               <!--data-slide="next">&rsaquo;-->
-            <!--</a>-->
-        <!--</div>-->
         <div class="carouselArea">
             <div id="featured">
                 <img src="/img/east.jpg" data-caption="#htmlCaption1" />
@@ -163,7 +153,6 @@
         <button class="btn btn-info block" id="callAuthor">联系我</button><br />
         <button class="btn btn-info block" id="applyingLink">申请友链</button>
 
-        <!--<div th:include="tempFile"></div>-->
     </div>
 </div>
 <!-- 主体 over-->

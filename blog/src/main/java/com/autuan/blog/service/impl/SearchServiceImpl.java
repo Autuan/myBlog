@@ -40,7 +40,7 @@ public class SearchServiceImpl implements SearchService {
         query.setRows(rows);
 
         //设置搜索域(默认域)--默认查询的是商品的标题
-        query.set("df", "acticleTitle");
+        query.set("df", "articleTitle");
         //设置高光
         query.setHighlight(true);
         //设置高光显示的具体的域
