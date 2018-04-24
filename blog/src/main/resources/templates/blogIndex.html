@@ -14,7 +14,7 @@
             float: right;
             width: 400px;
             height: 600px;
-            border: 1px solid red;
+            /*border: 1px solid red;*/
         }
         .menuLeft{
             float: left;
@@ -38,32 +38,7 @@
 </head>
 
 <body>
-<!-- 头部 (应该导入) -->
-<!--<nav class="navbar navbar-static-top navbar-default">-->
-    <!--<div class="container">-->
-        <!--<div class="navbar-header">-->
-            <!--<a class="navbar-brand" href="http://10.1.54.67:8082">-->
-                <!--<img src="img/logo-h-word.png" />-->
-            <!--</a>-->
-        <!--</div>-->
-        <!--<div id="navbar" class="navbar-collapse collapse">-->
-            <!--<form class="navbar-form navbar-right" id="logForm">-->
-                <!--<div class="form-group">-->
-                    <!--<input type="text" placeholder="用户名" class="form-control" name="username" />-->
-                <!--</div>-->
-                <!--<div class="form-group">-->
-                    <!--<input type="password" placeholder="密码" class="form-control" name="password" />-->
-                <!--</div>-->
-                <!--<button type="submit" class="btn btn-success">登陆</button>-->
-                <!--<button type="button" class="btn btn-info">注册</button>-->
-            <!--</form>-->
-        <!--</div>&lt;!&ndash;/.navbar-collapse &ndash;&gt;-->
-    <!--</div>-->
-<!--</nav>-->
-
-<!-- 头部 over-->
-
-<div th:include="head"></div>
+<div th:include="frontCommon :: head"></div>
 
 <!-- 主体 over -->
 <div class="container">
@@ -111,44 +86,33 @@
         <div>
             <ul id="jqpaginator" class="pagination"></ul>
         </div>
-        <!--<nav aria-label="Page navigation">-->
-            <!--<ul class="pagination">-->
-                <!--<li>-->
-                    <!--<a href="#" aria-label="Previous">-->
-                        <!--<span aria-hidden="true">&laquo;</span>-->
-                    <!--</a>-->
-                <!--</li>-->
-                <!--<li><a href="#">1</a></li>-->
-                <!--<li><a href="#">2</a></li>-->
-                <!--<li><a href="#">3</a></li>-->
-                <!--<li><a href="#">4</a></li>-->
-                <!--<li><a href="#">5</a></li>-->
-                <!--<li>-->
-                    <!--<a href="#" aria-label="Next">-->
-                        <!--<span aria-hidden="true">&raquo;</span>-->
-                    <!--</a>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</nav>-->
     </div>
 
     <!-- 右侧信息 -->
     <div class="menuRight">
         <div class="carouselArea">
             <div id="featured">
+                <a href="localhost:8009/article/20180412094022">
                 <img src="/img/east.jpg" data-caption="#htmlCaption1" />
+                </a>
+
+                <a href="localhost:8009/article/20180412095919">
                 <img src="/img/east2.jpg" data-caption="#htmlCaption2" />
+                </a>
+
+                <a href="localhost:8009/article/20180413093608">
                 <img src="/img/03.jpg" data-caption="#htmlCaption3" />
+                </a>
             </div>
             <!-- Captions for Orbit -->
             <span class="orbit-caption" id="htmlCaption1"><strong>1</strong></span>
             <span class="orbit-caption" id="htmlCaption2"><strong>2</strong></span>
             <span class="orbit-caption" id="htmlCaption3"><strong>3</strong></span>
         </div>
-        <div>
-            <h4>告示板</h4><br />
-            <span>这是一段用于测试的短语,无任何含义.这是一段用于测试的短语,无任何含义.</span>
-        </div>
+        <!--<div>-->
+            <!--<h4>告示板</h4><br />-->
+            <!--<span>这是一段用于测试的短语,无任何含义.这是一段用于测试的短语,无任何含义.</span>-->
+        <!--</div>-->
 
         <button class="btn btn-info block" id="callAuthor">联系我</button><br />
         <button class="btn btn-info block" id="applyingLink">申请友链</button>
@@ -158,23 +122,7 @@
 <!-- 主体 over-->
 
 <!-- 脚部 (应该导入) -->
-<!-- 友情链接 -->
-<div class="container">
-    <div class="friendUrl">友情链接</div>
-    <a href="#">链接A</a>
-    <a href="#">链接B</a>
-    <!-- 脚部信息 -->
-    <footer class="panel-footer">
-
-        <div class="footSpan">
-
-            <span>看山网络@Company LookMountain 2017-2027 IPC.RPC</span><br/>
-            <span>网络经营许可证:GB/S:ICA98547344-5484CT-448S</span><br/>
-            <span>地址:上海市54公路1708号</span><br/>
-
-        </div>
-    </footer>
-</div>
+<div th:include="frontCommon :: foot"></div>
 <!-- 脚部 over-->
 
 <!-- modal -->
@@ -212,9 +160,9 @@
             advanceSpeed: 4000,//图片切换时间
             //timer:false,       //是否启动开始暂停功能
             //animation: 'fade', //动画效果：有fade（淡入）, horizontal-slide（垂直滑动）, vertical-slide（水平滑动）, horizontal-push, vertical-push
-            //captions: false,    //是否启用标题
+            captions: true,    //是否启用标题
             //captionAnimation: 'slideOpen',  //标题动画
-            directionalNav: false,//是否启用上一页、下一页功能
+            directionalNav: true,//是否启用上一页、下一页功能
         });
     });
     $(function () {

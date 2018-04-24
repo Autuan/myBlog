@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="head">
+    <nav class="navbar navbar-static-top navbar-default">
+        <!--<div th:fragment="myHead">-->
+        <div class="container">
+            <div class="navbar-header">
+                <!--<a class="navbar-brand" href="http://10.1.54.67:8082">-->
+                    <!--<img src="img/logo-h-word.png" />-->
+                <!--</a>-->
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <form class="navbar-form navbar-left" id="searchForm">
+                    <div class="form-group">
+                        <input type="text" id="searchKey" placeholder="search something in my blog..." class="form-control" name="searchKey" />
+                    </div>
+                    <button type="button" class="btn btn-info" id="searchBegin" onclick="search()">搜索</button>
+                </form>
+
+
+            </div><!--/.navbar-collapse -->
+        </div>
+        <!--</div>-->
+    </nav>
+</div>
+
+<div th:fragment="foot">
+    <div class="container">
+        <div class="friendUrl">友情链接</div>
+        <a href="#">链接A</a>
+        <a href="#">链接B</a>
+        <!-- 脚部信息 -->
+        <footer class="panel-footer">
+
+            <div class="footSpan">
+
+                <span>看山网络@Company LookMountain 2017-2027 IPC.RPC</span><br/>
+                <span>网络经营许可证:GB/S:ICA98547344-5484CT-448S</span><br/>
+                <span>地址:上海市54公路1708号</span><br/>
+
+            </div>
+        </footer>
+    </div>
+</div>
+</body>
+</html>

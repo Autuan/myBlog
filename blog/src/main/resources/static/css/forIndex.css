@@ -18,7 +18,7 @@
 .commentPublishArea{
 	width: 70%;
 	height: 160px;
-	border-bottom: 1px solid gainsboro;
+	/*border-bottom: 1px solid gainsboro;*/
 	margin-bottom: 20px;
 }
 .commentPublish{
@@ -49,9 +49,10 @@
 
 /*.demo{width:95%;margin:50px auto 10px auto;padding:10px;}*/
 .navbar-header img{
-    width: 400px;
+    width: 40px;
     height: 50px;
     margin-top: -16px;
+	border: none;
 }
 
 .carouselLeft{
@@ -142,11 +143,11 @@
 .commentTool{
 	float: left;
 	width: 80%;
-	color: grey;
+	/*color: grey;*/
 	margin-top: 20px;
 }
 .commentExhibit{
-	border-bottom: gainsboro solid 1px;
+	/*border-bottom: gainsboro solid 1px;*/
 	margin-bottom: 15px;
 	
 }
