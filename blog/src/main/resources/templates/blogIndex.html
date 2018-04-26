@@ -132,6 +132,8 @@
         </div>
     </div>
 </div>
+<div th:include="frontCommon :: myModal"></div>
+<div th:include="frontCommon :: alertModal"></div>
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
@@ -154,17 +156,25 @@
 
         $("#callAuthor").click(function () {
             jQuery.alertWindow("修改成功");
+
+            $("#alertModal").modal('show');
         });
         $("#applyingLink").click(function () {
-
+            $("#myModal").modal('show');
         });
     });
     function alertModal(content) {
-        $("#promptModal").modal('toggle');
-        $("#modalContent").text(content);
+//        $("#promptModal").modal('toggle');
+//        $("#modalContent").text(content);
+//        //定时器，1秒后关闭提示
+//        setTimeout(function () {
+//            $("#promptModal").modal('toggle');
+//        },1000);
+        $("#alertModal").modal('toggle');
+        $("#alertContent").text(content);
         //定时器，1秒后关闭提示
         setTimeout(function () {
-            $("#promptModal").modal('toggle');
+            $("#alertModal").modal('toggle');
         },1000);
     }
 //    搜索功能
