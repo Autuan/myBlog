@@ -54,22 +54,58 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="chapterListUpload"></h4>
+                    <h4 class="modal-title" id="chapterListUpload">友链申请</h4>
                 </div>
                 <div class="modal-body">
+                    <h4>友链申请需知:</h4>
+                    <span>1:请先添加我的链接</span><br>
+                    <span>名称：autuan 的博客</span><br>
+                    <span>简介：autuan 的 java 后端开发博客</span><br>
+                    <span>URL：http://autuan.cn</span><br>
+                    <span>邮箱：autuan.yu@gmail.com</span><br>
+                    <span>2:留言板格式</span><br>
+                    <span>名称：XXX (必填)</span><br>
+                    <span>简介：XXXXXX</span><br>
+                    <span>URL：http://(https://)XXXXXXX(必填)</span><br>
+                    <span>邮箱：(必填)</span><br><br>
+                    <span>输入你的信息:</span><br>
                     <form enctype="multipart/form-data" class="form-horizontal" role="form" id="roleForm">
                         <input type="hidden" name="FormRoleId" id="FormRoleId">
                         <div class="form-group">
-                            <label for="firstname" class="col-sm-2 control-label"> </label>
-                            <div class="col-sm-10" id="firstname">
-                                <input type="text" name="">
+                            <label for="linkName" class="col-sm-2 control-label">名称 * </label>
+                            <div class="col-sm-10" id="linkName">
+                                <input type="text" name="linkName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="linkSubContent" class="col-sm-2 control-label">简介 </label>
+                            <div class="col-sm-10" id="linkSubContent">
+                                <input type="text" name="linkSubContent">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="linkUrl" class="col-sm-2 control-label">URL * </label>
+                            <div class="col-sm-10" id="linkUrl">
+                                <input type="text" name="linkUrl">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="linkEmail" class="col-sm-2 control-label">邮箱 * </label>
+                            <div class="col-sm-10" id="linkEmail">
+                                <input type="text" name="linkEmail">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="linkQq" class="col-sm-2 control-label">QQ </label>
+                            <div class="col-sm-10" id="linkQq">
+                                <input type="text" name="linkQq">
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary"  onClick="roleSubmit();">提交更改</button>
+                    <button type="button" class="btn btn-primary"  onClick="roleSubmit();">提交</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
@@ -90,7 +126,9 @@
                             <!--<label for="content" class="col-sm-2 control-label"> </label>-->
                             <div class="col-sm-10">
                                 <!--<input type="text" name="" id="content">-->
+                                <br><br><br>
                                 <span id="alertContent"></span>
+                                <br><br><br>
                             </div>
                         </div>
                     </form>

@@ -155,9 +155,7 @@
     $(function () {
 
         $("#callAuthor").click(function () {
-            jQuery.alertWindow("修改成功");
-
-            $("#alertModal").modal('show');
+            alertModal("邮箱: autuan.yu@gmail.com");
         });
         $("#applyingLink").click(function () {
             $("#myModal").modal('show');
@@ -172,10 +170,10 @@
 //        },1000);
         $("#alertModal").modal('toggle');
         $("#alertContent").text(content);
-        //定时器，1秒后关闭提示
+        //定时器，1.5秒后关闭提示
         setTimeout(function () {
             $("#alertModal").modal('toggle');
-        },1000);
+        },1500);
     }
 //    搜索功能
     $(function () {
