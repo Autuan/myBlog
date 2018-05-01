@@ -13,10 +13,11 @@
             float: right;
             width: 400px;
             height: 600px;
-            border: 1px solid red;
+            /*border: 1px solid red;*/
         }
         .menuLeft{
             float: left;
+            width:550px;
         }
         .carouselArea img{
             width:400px;
@@ -25,101 +26,63 @@
         .article {
             margin-bottom: 30px;
         }
+        .aritcleImage{
+            width:150px;
+            height:150px;
+        }
+        .media-left{
+            float: left;
+        }
     </style>
 </head>
 
 <body>
 
-<div th:include="head"></div>
+<div th:include="frontCommon :: head"></div>
 
 <!-- 主体 over -->
 <div class="container">
+    <div class="menuLeft">
+        <div th:each="article,aritcleStat : ${articleList}">
+            <div class="media article">
 
-        <div th:each="item,itemStat : ${itemList}">
-            <div class="article">
-                <div class="articleTitle">
-                    <a class="h2" th:text="${item.articleTitle}" th:href="@{'/article/'+${item.articleId}}"></a>
-                    <small th:text="${item.articleAlertTime}"></small>
-                </div>
-                <div class="articleContent">
-                    <span th:text="${item.articleContentSub}"></span>
-                </div>
+                <div class="media-body">
+                    <div class="media-left" th:unless="${#lists.isEmpty(article.articleContentSubLink)}">
+                        <a th:href="@{${article.articleUrl}}">
+                            <img class="aritcleImage" th:src="@{${article.articleContentSubLink}}" />
+                        </a>
+                    </div>
+                    <a class="h2 media-heading" th:utext="${article.articleTitle}"
+                       th:href="@{${article.articleUrl}}">
+                        <small th:text="${article.articleAlertTime}"></small>
+                    </a>
 
+                    <div class="articleContent">
+                        <span th:text="${article.articleContentSub}"></span>
+                    </div>
+
+                </div>
             </div>
+        </div>
+        <!-- 分页 -->
+        <input type="hidden" id="pageSize" th:value="${pageSize}" />
+        <input type="hidden" id="currentPage" th:value="${currentPage}" />
+        <input type="hidden" id="totalPages" th:value="${totalPages}" />
+        <div>
+            <ul id="jqpaginator" class="pagination"></ul>
         </div>
     </div>
 
     <!-- 右侧信息 -->
-    <div class="menuRight">
-        <!--<div id="myCarousel" class="carousel slide">-->
-            <!--&lt;!&ndash; 轮播（Carousel）指标 &ndash;&gt;-->
-            <!--<ol class="carousel-indicators">-->
-                <!--<li data-target="#myCarousel" data-slide-to="0" class="active"></li>-->
-                <!--<li data-target="#myCarousel" data-slide-to="1"></li>-->
-                <!--<li data-target="#myCarousel" data-slide-to="2"></li>-->
-            <!--</ol>-->
-            <!--&lt;!&ndash; 轮播（Carousel）项目 &ndash;&gt;-->
-            <!--<div class="carousel-inner">-->
-                <!--<div class="item active">-->
-                    <!--<img src="/img/east.jpg" alt="First slide" class="carousel-inner-img"/>-->
-                <!--</div>-->
-                <!--<div class="item">-->
-                    <!--<img src="/img/east2.jpg" alt="Second slide" class="carousel-inner-img"/>-->
-                <!--</div>-->
-                <!--<div class="item">-->
-                    <!--<img src="/img/03.jpg" alt="Third slide" class="carousel-inner-img"/>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--&lt;!&ndash; 轮播（Carousel）导航 &ndash;&gt;-->
-            <!--<a class="carousel-control left" href="#myCarousel"-->
-               <!--data-slide="prev">&lsaquo;-->
-            <!--</a>-->
-            <!--<a class="carousel-control right" href="#myCarousel"-->
-               <!--data-slide="next">&rsaquo;-->
-            <!--</a>-->
-        <!--</div>-->
-        <div class="carouselArea">
-            <div id="featured">
-                <img src="/img/east.jpg" data-caption="#htmlCaption1" />
-                <img src="/img/east2.jpg" data-caption="#htmlCaption2" />
-                <img src="/img/03.jpg" data-caption="#htmlCaption3" />
-            </div>
-            <!-- Captions for Orbit -->
-            <span class="orbit-caption" id="htmlCaption1"><strong>1</strong></span>
-            <span class="orbit-caption" id="htmlCaption2"><strong>2</strong></span>
-            <span class="orbit-caption" id="htmlCaption3"><strong>3</strong></span>
-        </div>
-        <div>
-            <h4>告示板</h4><br />
-            <span>这是一段用于测试的短语,无任何含义.这是一段用于测试的短语,无任何含义.</span>
-        </div>
+<div th:include="frontCommon :: menuRight"></div>
 
-        <button class="btn btn-info block" id="callAuthor">联系我</button><br />
-        <button class="btn btn-info block" id="applyingLink">申请友链</button>
 
-        <div th:include="tempFile"></div>
-    </div>
+
 </div>
 <!-- 主体 over-->
 
 <!-- 脚部 (应该导入) -->
-<!-- 友情链接 -->
-<div class="container">
-    <div class="friendUrl">友情链接</div>
-    <a href="#">链接A</a>
-    <a href="#">链接B</a>
-    <!-- 脚部信息 -->
-    <footer class="panel-footer">
-
-        <div class="footSpan">
-
-            <span>看山网络@Company LookMountain 2017-2027 IPC.RPC</span><br/>
-            <span>网络经营许可证:GB/S:ICA98547344-5484CT-448S</span><br/>
-            <span>地址:上海市54公路1708号</span><br/>
-
-        </div>
-    </footer>
-</div>
+<div th:include="frontCommon :: foot"></div>
 <!-- 脚部 over-->
 
 <!-- modal -->
@@ -133,6 +96,7 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/jquery.orbit-1.3.0.js"></script>
+<script src="/js/bootstrap-paginator.js"></script>
 <!--<script src="/js/alertTip.js"></script>-->
 <!--<script>-->
     <!--$(function(){-->

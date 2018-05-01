@@ -7,11 +7,19 @@ public class SearchItem {
     private String articleId;
     private String articleTitle;
     private String articleContentSub;
+    private String articleContentSubLink;
     private String articlePublishTime;
     private String articleAlertTime;
     private String articleUrl;
     private String labelName;
 
+    public String getArticleContentSubLink() {
+        return articleContentSubLink;
+    }
+
+    public void setArticleContentSubLink(String articleContentSubLink) {
+        this.articleContentSubLink = articleContentSubLink;
+    }
 
     public String getArticleUrl() {
         return articleUrl;

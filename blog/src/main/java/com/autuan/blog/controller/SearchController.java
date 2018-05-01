@@ -16,7 +16,7 @@ public class SearchController {
     private SearchService searchService;
 
     // ========================= =========================
-    @Value("20")
+    @Value("10")
     private Integer PAGE_SIZE;
 
     // ========================= =========================
@@ -26,9 +26,10 @@ public class SearchController {
         SearchResult result = searchService.getSearchResult(query,page,PAGE_SIZE);
         //数据回显
         model.addAttribute("query", query);
-        model.addAttribute("itemList", result.getItemList());		//查询到的商品集合(从dao层查询)
+        model.addAttribute("pageSize", PAGE_SIZE);
+        model.addAttribute("articleList", result.getItemList());		//查询到的商品集合(从dao层查询)
         model.addAttribute("totalPages", result.getTotalPage());	//总的页数(获取到总的信息条数，然后根据每页显示屏的信息条数进行计算)
-        model.addAttribute("page", page);			//当前的页码(翻页)
+        model.addAttribute("currentPage", page);			//当前的页码(翻页)
         return "search";
     }
 

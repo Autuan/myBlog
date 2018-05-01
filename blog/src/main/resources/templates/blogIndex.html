@@ -89,35 +89,7 @@
     </div>
 
     <!-- 右侧信息 -->
-    <div class="menuRight">
-        <div class="carouselArea">
-            <div id="featured">
-                <a href="localhost:8009/article/20180412094022">
-                <img src="/img/east.jpg" data-caption="#htmlCaption1" />
-                </a>
-
-                <a href="localhost:8009/article/20180412095919">
-                <img src="/img/east2.jpg" data-caption="#htmlCaption2" />
-                </a>
-
-                <a href="localhost:8009/article/20180413093608">
-                <img src="/img/03.jpg" data-caption="#htmlCaption3" />
-                </a>
-            </div>
-            <!-- Captions for Orbit -->
-            <span class="orbit-caption" id="htmlCaption1"><strong>1</strong></span>
-            <span class="orbit-caption" id="htmlCaption2"><strong>2</strong></span>
-            <span class="orbit-caption" id="htmlCaption3"><strong>3</strong></span>
-        </div>
-        <!--<div>-->
-            <!--<h4>告示板</h4><br />-->
-            <!--<span>这是一段用于测试的短语,无任何含义.这是一段用于测试的短语,无任何含义.</span>-->
-        <!--</div>-->
-
-        <button class="btn btn-info block" id="callAuthor">联系我</button><br />
-        <button class="btn btn-info block" id="applyingLink">申请友链</button>
-
-    </div>
+    <div th:include="frontCommon :: menuRight"></div>
 </div>
 <!-- 主体 over-->
 

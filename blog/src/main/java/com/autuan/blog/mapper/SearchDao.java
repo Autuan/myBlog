@@ -45,6 +45,7 @@ public class SearchDao {
             //System.out.println(itemTile);
             item.setArticleTitle(itemTile);
             //---------------------------------------
+            item.setArticleContentSubLink((String) solrDocument.get("aricleContentSubLink"));
             item.setArticleId((String) solrDocument.get("id"));
             item.setArticleAlertTime((String) solrDocument.get("articleAlertTime"));
             item.setArticlePublishTime((String) solrDocument.get("articlePublishTime"));

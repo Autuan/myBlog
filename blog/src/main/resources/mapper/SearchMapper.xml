@@ -6,6 +6,7 @@
         a.article_id articleId,
         a.article_title articleTitle,
         a.article_content_sub articleContentSub,
+        a.article_content_sub_link articleContentSubLink,
         a.article_publish_time articlePublishTime,
         a.article_alert_time articleAlertTime,
         a.article_url articleUrl,

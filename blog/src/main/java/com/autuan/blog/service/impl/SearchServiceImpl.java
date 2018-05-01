@@ -31,7 +31,8 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public SearchResult getSearchResult(String queryString, int page, Integer rows) {
         SolrQuery query = new SolrQuery();
-        query.setQuery(queryString);
+        // queryString 调试出错,加上通配符 *
+        query.setQuery("*" + queryString + "*");
         //设置分页信息
         //(当前页 - 1)*每页显示的信息条数
         if(page < 1) page = 1;
@@ -39,7 +40,7 @@ public class SearchServiceImpl implements SearchService {
         if(rows < 1) rows = 20;
         query.setRows(rows);
 
-        //设置搜索域(默认域)--默认查询的是商品的标题
+        //设置搜索域(默认域)--默认查询的是标题
         query.set("df", "articleTitle");
         //设置高光
         query.setHighlight(true);
@@ -76,6 +77,7 @@ public class SearchServiceImpl implements SearchService {
                 doc.setField("articleContentSub",article.getArticleContentSub());
                 doc.setField("articlePublishTime",article.getArticlePublishTime());
                 doc.setField("articleAlertTime",article.getArticleAlertTime());
+                doc.setField("articleContentSubLink",article.getArticleContentSubLink());
                 solrClient.add(doc);
             } catch (SolrServerException e) {
                 e.printStackTrace();
