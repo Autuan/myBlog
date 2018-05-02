@@ -97,6 +97,7 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/jquery.orbit-1.3.0.js"></script>
 <script src="/js/bootstrap-paginator.js"></script>
+<script src="/js/forBlog.js"></script>
 <!--<script src="/js/alertTip.js"></script>-->
 <!--<script>-->
     <!--$(function(){-->
@@ -141,12 +142,7 @@
             $("#promptModal").modal('toggle');
         },1000);
     }
-//    搜索功能
-    $(function () {
-        $("#searchBegin").click(function () {
-            alertModal("此功能尚未完善");
-        });
-    });
+
 
 //    登陆注册功能
     $(function () {
@@ -184,6 +180,31 @@
 //                success:logInCallback(obj);
 //            });
         });
+    })
+
+
+    $(function () {
+        function perspPageBar(id){
+            $("#" + id).bootstrapPaginator({
+                bootstrapMajorVersion: 3,　　// 指定Bootstrap的版本，默认是Boostrap2，如果你用的是Boostrap3，则必须指定该值。
+                currentPage:currentPage,　　// 当前页码
+                totalPages:totalPage,　　// 总页数
+                numberOfPages: 5,　　// 显示页的数量
+                useBootstrapTooltip: true,　　// 使用Bootstrap提示样式
+                itemContainerClass: function (type, page, current) {　　// 应用鼠标的手型光标
+                    return (page === current) ? "active" : "pointer-cursor";
+                },
+                onPageClicked: function(event, originalEvent, type,page){　　// 页面改变时事件
+                    // do something
+                    location = "/?pageNumber="+page;
+                }
+            });
+        };
+
+        var currentPage = $("#currentPage").val();
+        var totalPage = $("#totalPages").val();
+        perspPageBar("jqpaginator",currentPage,totalPage);
+
     })
 </script>
 </body>

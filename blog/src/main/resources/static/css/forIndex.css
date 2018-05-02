@@ -1,53 +1,4 @@
-.videoBloack,.glyphicon-thumbs-up,.commentReturn,.glyphicon-thumbs-down,.personInfo,.personImg:hover{
-		    cursor:pointer;
-}
 
-/* 评论区css*/
-.glyphicon-thumbs-up {
-	margin-left: 5px;
-}
-.glyphicon-thumbs-down{
-	margin-left: 10px;
-}
-.hasChoose {
-	color: red;
-}
-.commentReturn{
-	margin-left: 10px;
-}
-.commentPublishArea{
-	width: 70%;
-	height: 160px;
-	/*border-bottom: 1px solid gainsboro;*/
-	margin-bottom: 20px;
-}
-.commentPublish{
-	height: 150px;
-	width: 70%;
-	float: left;
-	
-}
-.commentButton{
-	float: left;
-	width: 10%;
-	height: 80px;
-	
-	margin-left: 20px;
-	margin-top: 20px;
-}
-#firstEditorButton{
-	height: 100%;
-}
-.w-e-text-container{
-	height: 100px!important;
-	}
-	
-.personInfo{
-	margin-bottom: 2px;
-}
-/*// 评论区over*/
-
-/*.demo{width:95%;margin:50px auto 10px auto;padding:10px;}*/
 .navbar-header img{
     width: 40px;
     height: 50px;
@@ -55,100 +6,23 @@
 	border: none;
 }
 
-.carouselLeft{
-                width: 35%;
-                height: 250px;
-                border: 1px solid black;
-            }
-.carouselRight{
-                width: 65%;
-                height: 250px;
-                border: 1px solid yellow;
-}
-#corouselLeftA{
-    height: 100%;
-}
-.carouselRight ul li {
-    float: left;
-    margin-left: 10px;
-}
-.carousel-inner item img{
-    height: 100%;
-}
 .footSpan{
                 text-align: center;
 }
-.smallRight{
-    float: right;
-    margin-right: 15px;
-    margin-top: 5px;
-    padding-right: 7px;
-}
-.panel-title{
-    background: palevioletred;
-}
-.videoBloack{
-    width:200px;
-    height:120px; 
-}
-.panel-body ul li {
-    list-style: none;
-    float: left;
-    margin-left: 10px;
-}
-.videoBloack img{
-    width: 100%;
-    height: 100%;
-}
 
+/**
+	搜索样式
+ */
 
-#editionHead{
-    background-image: url(../img/EditionHead.jpg);
-    height: 130px;
+#searchKey{
+	width:300px;
 }
-.searchDiv{
-    margin-top: 30px;
-    margin-right: -25px;
+.searchCenter{
+	margin-top: 5px;
 }
-.height100{
-                height: 100%;
+.searchCenter input{
+	margin-right: 5px;
 }
-
-
-
-.commentExhibit{
-	
-	width:60%;
-	height: 100px;
-	
-}
-.personImg{
-	width: 100px;
-	float: left;
-	
-	height: 100%;
-}
-.personInfo{
-	float: left;
-	color: blue;
-	margin-top: 2%;
-	width: 80%;
-}
-.personInfo span {
-	text-emphasis-color: red;
-}
-.contentArea{
-	float: left;
-}
-.commentTool{
-	float: left;
-	width: 80%;
-	/*color: grey;*/
-	margin-top: 20px;
-}
-.commentExhibit{
-	/*border-bottom: gainsboro solid 1px;*/
-	margin-bottom: 15px;
-	
-}
-
+/**
+	搜索样式 over
+ */

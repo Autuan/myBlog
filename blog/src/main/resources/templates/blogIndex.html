@@ -112,7 +112,7 @@
 <script src="/js/jquery.orbit-1.3.0.js"></script>
 <!--<script src="/js/jqpaginator.min.js"></script>-->
 <script src="/js/bootstrap-paginator.js"></script>
-
+<script src="/js/forBlog.js"></script>
 <script>
     $(function () {
         $('#featured').orbit({
@@ -147,54 +147,42 @@
             $("#alertModal").modal('toggle');
         },1500);
     }
-//    搜索功能
-    $(function () {
-        $("#searchBegin").click(function () {
-            alertModal("此功能尚未完善");
-        });
-    });
+
 
 //    登陆注册功能
-    $(function () {
-        $("#logInButton").click(function () {
-           // 前台验证
-
-           // ------------------------- -------------------------
-           // 发送后台
-            var logInUrl = "/login/login";
-            var logInDate = {
-                username : $("#username").val(),
-                password : $("#password").val()
-            };
-            var logInCallback = function (obj) {
-                var result = obj.describe;
-                console.log(obj);
-                console.log(result);
-                if (result == "success") {
-                    alertModal("成功!");
-                // 丨→cookie 保存
-                    $.cookie('autuanBlog',$("#username").val(),{expires:0.0007});
-                // 刷新页面
-                    reload();
-                } else {
-                    alertModal("失败!");
-                }
-            };
-            $.post(logInUrl,logInDate,logInCallback,"json");
-        });
-    })
+//    $(function () {
+//        $("#logInButton").click(function () {
+//           // 前台验证
+//
+//           // ------------------------- -------------------------
+//           // 发送后台
+//            var logInUrl = "/login/login";
+//            var logInDate = {
+//                username : $("#username").val(),
+//                password : $("#password").val()
+//            };
+//            var logInCallback = function (obj) {
+//                var result = obj.describe;
+//                console.log(obj);
+//                console.log(result);
+//                if (result == "success") {
+//                    alertModal("成功!");
+//                // 丨→cookie 保存
+//                    $.cookie('autuanBlog',$("#username").val(),{expires:0.0007});
+//                // 刷新页面
+//                    reload();
+//                } else {
+//                    alertModal("失败!");
+//                }
+//            };
+//            $.post(logInUrl,logInDate,logInCallback,"json");
+//        });
+//    })
 </script>
 
 <!-- 搜索功能块 -->
 <script>
-    function search() {
-        var query = $("#searchKey").val();
-        var page = $("#page").val()
-        if ( page == null ) {
-            page = 1;
-        }
-        location = "localhost:8009/search?q="+query+"&page="+page;
-    }
+
 
 //    分页管理
     $(function () {
