@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
-    <title th:text="'搜索:'+${query}"></title>
+    <title th:text="'博客内容搜索:'+${query}"></title>
     <link rel="stylesheet" href="/css/bootstrap.css"/>
     <link rel="stylesheet" href="/css/bootstrap-theme.css"/>
     <link rel="stylesheet" href="/css/forIndex.css" />
@@ -14,6 +14,9 @@
             width: 400px;
             height: 600px;
             /*border: 1px solid red;*/
+        }
+        #query{
+            color: red;
         }
         .menuLeft{
             float: left;
@@ -40,9 +43,13 @@
 
 <div th:include="frontCommon :: head"></div>
 
-<!-- 主体 over -->
+<!-- 主体  -->
 <div class="container">
     <div class="menuLeft">
+        <div>
+            <span>您搜索的是:&nbsp;&nbsp;</span>
+            <b th:text="${query}" id="query"></b><br><br>
+        </div>
         <div th:each="article,aritcleStat : ${articleList}">
             <div class="media article">
 
@@ -195,8 +202,8 @@
                     return (page === current) ? "active" : "pointer-cursor";
                 },
                 onPageClicked: function(event, originalEvent, type,page){　　// 页面改变时事件
-                    // do something
-                    location = "/?pageNumber="+page;
+                    var q = $("#query").html();
+                    location = "/search?q="+q+"&page="+page;
                 }
             });
         };

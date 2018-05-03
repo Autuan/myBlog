@@ -37,7 +37,7 @@ public class SearchServiceImpl implements SearchService {
         //(当前页 - 1)*每页显示的信息条数
         if(page < 1) page = 1;
         query.setStart((page - 1)*rows);
-        if(rows < 1) rows = 20;
+        if(rows < 1) rows = 5;
         query.setRows(rows);
 
         //设置搜索域(默认域)--默认查询的是标题

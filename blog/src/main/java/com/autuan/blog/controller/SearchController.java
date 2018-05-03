@@ -16,7 +16,7 @@ public class SearchController {
     private SearchService searchService;
 
     // ========================= =========================
-    @Value("10")
+    @Value("5")
     private Integer PAGE_SIZE;
 
     // ========================= =========================
