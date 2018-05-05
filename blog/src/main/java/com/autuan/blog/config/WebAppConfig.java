@@ -1,6 +1,8 @@
 package com.autuan.blog.config;
 
 import com.autuan.blog.interceptor.BlogInterceptor;
+import org.springframework.amqp.core.Queue;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -14,5 +16,15 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
                 .addPathPatterns("/log/**");
                 //.excludePathPatterns("/back");
         super.addInterceptors(registry);
+    }
+
+
+    @Bean
+    public Queue blogQueue(){
+        return new Queue("blog");
+    }
+
+    public Queue linkQueue(){
+        return new Queue("link");
     }
 }

@@ -14,6 +14,8 @@ import java.util.List;
 public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleMapper articleMapper;
+
+    //private
     @Override
     public List<Article> getArticleList() {
         return articleMapper.getArticleList();
