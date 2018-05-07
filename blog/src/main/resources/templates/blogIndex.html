@@ -34,6 +34,9 @@
         .media-left{
             float: left;
         }
+        .friendLinkUrl{
+            margin-left:5px;
+        }
     </style>
 </head>
 
@@ -220,6 +223,22 @@
         }
         $.post(url,data,callback,"text");
     }
+
+    // 异步填充友链
+    $(function () {
+       var url = "/getLinkListOS";
+       var callback = function(obj){
+           if ( obj != null && obj != "") {
+               console.log(obj);
+               for ( var i=0;i<obj.length;i++ ) {
+                   var str = "<a class='friendLinkUrl' href='"+obj[i].linkUrl+"'>"+obj[i].linkName+"</a>";
+                   $("#friendUrl").append(str);
+
+               }
+           }
+       };
+       $.get(url,callback,"json");
+    });
 </script>
 </body>
 </html>

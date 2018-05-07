@@ -14,9 +14,21 @@
     link_id, link_name, link_url, link_subContent, link_email, link_qq, link_show
   </sql>
 
-  <update id="updateLinkStatus">
-    UPDATE blog_link
-    SET link_show = 1
+
+  <select id="getLinkListOnlyShow" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from blog_link
+    WHERE link_show = 1
+  </select>
+  <select id="getLinkList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from blog_link
+  </select>
+  <update id="banLink">
+     UPDATE blog_link
+    SET link_show = #{status}
     WHERE link_id = #{linkId}
   </update>
 

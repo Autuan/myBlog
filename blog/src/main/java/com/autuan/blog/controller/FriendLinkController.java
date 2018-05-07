@@ -20,23 +20,32 @@ public class FriendLinkController {
     // ------------------------- -------------------------
     @RequestMapping("/getLinkList")
     @GetMapping
-    public List<?> getLinkList(){
-        return null;
+    public List<Link> getLinkList(){
+        return linkService.getLinkList();
+    }
+
+    @RequestMapping("/getLinkListOS")
+    @GetMapping
+    public List<Link> getLinkListOnlyShow(){
+        return linkService.getLinkListOnlyShow();
     }
 
     @RequestMapping("/back/updateLink")
     public String updateLink(Link link){
-        return null;
+        linkService.updateLink(link);
+        return "success";
     }
 
     @RequestMapping("/back/deleteLink")
     public String deleteLink(Integer linkId){
-        return null;
+        linkService.deleteLink(linkId);
+        return "success";
     }
 
     @RequestMapping("/back/banLink")
-    public String banLink(Integer linkId){
-        return null;
+    public String banLink(Integer linkId,Integer status){
+        linkService.banLink(linkId,status);
+        return "success";
     }
 
     @RequestMapping("/back/insertLink")

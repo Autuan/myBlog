@@ -17,13 +17,9 @@ public class LinkListen {
     public void process(int linkId) {
         try {
             Long timeInterval = (long) (Math.random()*10000) ;
-            System.out.println("time is " + timeInterval);
             Thread.sleep(timeInterval);
-            System.out.println("time is " + timeInterval);
-            System.out.println("link id is " + linkId);
-            // 尝试 ping 博客
             // 修改状态
-            linkService.updateLinkStatus(linkId);
+            linkService.banLink(linkId,1);
             // 记录日志
         } catch (InterruptedException e) {
             e.printStackTrace();
