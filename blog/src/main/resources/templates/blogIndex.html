@@ -209,5 +209,17 @@
 
     })
 </script>
+<script>
+    // link 友链
+    function linkSubmit() {
+        var url = "/back/insertLink";
+        var data = $("#newLinkForm").serialize();
+        var callback = function (obj) {
+            alert("服务器已接收到您的请求,请等待博主确认!");
+
+        }
+        $.post(url,data,callback,"text");
+    }
+</script>
 </body>
 </html>

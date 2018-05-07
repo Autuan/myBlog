@@ -24,6 +24,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         return new Queue("blog");
     }
 
+    @Bean
     public Queue linkQueue(){
         return new Queue("link");
     }

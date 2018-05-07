@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.autuan.blog.mapper.LinkMapper" >
+  <resultMap id="BaseResultMap" type="com.autuan.blog.entity.Link" >
+    <id column="link_id" property="linkId" jdbcType="INTEGER" />
+    <result column="link_name" property="linkName" jdbcType="VARCHAR" />
+    <result column="link_url" property="linkUrl" jdbcType="VARCHAR" />
+    <result column="link_subContent" property="linkSubcontent" jdbcType="VARCHAR" />
+    <result column="link_email" property="linkEmail" jdbcType="VARCHAR" />
+    <result column="link_qq" property="linkQq" jdbcType="VARCHAR" />
+    <result column="link_show" property="linkShow" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    link_id, link_name, link_url, link_subContent, link_email, link_qq, link_show
+  </sql>
+
+  <update id="updateLinkStatus">
+    UPDATE blog_link
+    SET link_show = 1
+    WHERE link_id = #{linkId}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from blog_link
+    where link_id = #{linkId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from blog_link
+    where link_id = #{linkId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.autuan.blog.entity.Link" >
+    insert into blog_link (link_id, link_name, link_url, 
+      link_subContent, link_email, link_qq, 
+      link_show)
+    values (#{linkId,jdbcType=INTEGER}, #{linkName,jdbcType=VARCHAR}, #{linkUrl,jdbcType=VARCHAR}, 
+      #{linkSubcontent,jdbcType=VARCHAR}, #{linkEmail,jdbcType=VARCHAR}, #{linkQq,jdbcType=VARCHAR}, 
+      #{linkShow,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="linkId" parameterType="com.autuan.blog.entity.Link" >
+    insert into blog_link
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="linkId != null" >
+        link_id,
+      </if>
+      <if test="linkName != null" >
+        link_name,
+      </if>
+      <if test="linkUrl != null" >
+        link_url,
+      </if>
+      <if test="linkSubcontent != null" >
+        link_subContent,
+      </if>
+      <if test="linkEmail != null" >
+        link_email,
+      </if>
+      <if test="linkQq != null" >
+        link_qq,
+      </if>
+      <if test="linkShow != null" >
+        link_show,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="linkId != null" >
+        #{linkId,jdbcType=INTEGER},
+      </if>
+      <if test="linkName != null" >
+        #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkUrl != null" >
+        #{linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="linkSubcontent != null" >
+        #{linkSubcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="linkEmail != null" >
+        #{linkEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="linkQq != null" >
+        #{linkQq,jdbcType=VARCHAR},
+      </if>
+      <if test="linkShow != null" >
+        #{linkShow,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.autuan.blog.entity.Link" >
+    update blog_link
+    <set >
+      <if test="linkName != null" >
+        link_name = #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkUrl != null" >
+        link_url = #{linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="linkSubcontent != null" >
+        link_subContent = #{linkSubcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="linkEmail != null" >
+        link_email = #{linkEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="linkQq != null" >
+        link_qq = #{linkQq,jdbcType=VARCHAR},
+      </if>
+      <if test="linkShow != null" >
+        link_show = #{linkShow,jdbcType=INTEGER},
+      </if>
+    </set>
+    where link_id = #{linkId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.autuan.blog.entity.Link" >
+    update blog_link
+    set link_name = #{linkName,jdbcType=VARCHAR},
+      link_url = #{linkUrl,jdbcType=VARCHAR},
+      link_subContent = #{linkSubcontent,jdbcType=VARCHAR},
+      link_email = #{linkEmail,jdbcType=VARCHAR},
+      link_qq = #{linkQq,jdbcType=VARCHAR},
+      link_show = #{linkShow,jdbcType=INTEGER}
+    where link_id = #{linkId,jdbcType=INTEGER}
+  </update>
+</mapper>
