@@ -1,8 +1,7 @@
 package com.autuan.blog.controller;
 
 import com.autuan.blog.entity.Article;
-import com.autuan.blog.entity.PageArticle;
-import com.autuan.blog.entity.SearchResult;
+import com.autuan.blog.entity.PageResult;
 import com.autuan.blog.service.ArticleService;
 import com.autuan.blog.util.WebUtil;
 import com.github.pagehelper.PageHelper;
@@ -31,9 +30,9 @@ public class ArticleController {
      */
     @RequestMapping("/getArticleList")
     @ResponseBody
-    public PageArticle getArticleList(@RequestParam(defaultValue = "1",value = "pageNumber") Integer page,
+    public PageResult getArticleList(@RequestParam(defaultValue = "1",value = "pageNumber") Integer page,
                                       @RequestParam(value = "pageSize") Integer rows){
-        PageArticle pageArticle = new PageArticle();
+        PageResult pageArticle = new PageResult();
         PageHelper.startPage(page,rows);
         List<Article> articles = articleService.getArticleList();
         pageArticle.setRows(articles);

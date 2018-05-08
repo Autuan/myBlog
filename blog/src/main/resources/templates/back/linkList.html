@@ -28,8 +28,9 @@
             </div>
         </div>
     </div>
-
 </main>
+
+<div th:include="frontCommon :: myModal"></div>
 <!-- Essential javascripts for application to work-->
 <script src="/js/jquery.min.js"></script>
 <script src="/js/popper.min.js"></script>
@@ -38,24 +39,26 @@
 <script src="/js/bootstrap-table.min.js"></script>
 <script src="/js/bootstrap-table-zh-CN.min.js"></script>
 <script>
-    function roleSubmit(){
-        var id = $("#FormRoleId").val();
+    function linkSubmit(){
+        var id = $("#linkId").val();
         // ==0 添加
         if (id == 0) {
-            var url = "/insertNewTeam";
-            var data = $("#roleForm").serialize();
+            var url = "/back/insertLink";
+            var data = $("#newLinkForm").serialize();
             console.log(data);
             var callback = function(obj){
-                location = "localhost:8082";
+                alert("over");
+                $("#myModal").modal("hide");
             };
             $.post(url,data,callback,"text");
 
             // !=0 修改
         } else {
-            var url = "/updateTeam";
-            var data = $("#roleForm").serialize();
+            var url = "/back/updateLink";
+            var data = $("#newLinkForm").serialize();
             var callback = function(obj){
-                location = "localhost:8082";
+                alert("over");
+                $("#myModal").modal("hide");
             };
             console.log(data);
             $.post(url,data,callback,"text");
@@ -82,19 +85,53 @@
         } else {
             return "已禁止显示";
         }
+    };
+    function linkShowFormatter(value,row,index) {
+        return "<button>test</button>";
+    };
+    function linkUrlFormatter(value,row,index) {
+        return "<a href='"+value+"'>访问博客</a>"
     }
+    window.showEvents = {
+      'click .ChangeLinkStatus' : function (e,value,row,index) {
+        var status = "0";
+        if ( value == "0") {
+            status == "1";
+        }
+        var url = "/back/banLink";
+        var data = {
+            linkId : row.linkId,
+            status : status
+        };
+        var callback = function (obj) {
+            if ( obj == "success" ) {
+                console.log(obj);
+                // 修改按钮状态
+            } else {
+                alert("错误，请稍后重试！" + obj);
+            }
+        };
+        $.post(url,data,callback,"text");
+      }
+    };
     window.operateEvents = {
         'click .ButtonA': function (e, value, row, index) {
-            console.log(row);
-            window.location.href = "localhost:8009/article/1";
-            return false;
+            // 回显
+            $("#linkId").val(row.linkId);
+            $("[name='linkName']").val(row.linkName);
+            $("[name='linkSubContent']").val(row.linkSubContent);
+            $("[name='linkUrl']").val(row.linkUrl);
+            $("[name='linkEmail']").val(row.linkEmail);
+            $("[name='linkQq']").val(row.linkQq);
+            // 显示Modal
+            $("#myModal").modal('show');
         },
         'click .ButtonB': function (e, value, row, index) {
-            var url = "";
+            var url = "/back/deleteLink";
             var callback = function(obj) {
                 console.log(obj);
             }
-            $.post(url,callback,"json");
+            $.post(url,{linkId:row.linkId},callback,"text");
         }
     };
     $(function(){
@@ -114,7 +151,7 @@
             //设置为 '' 在这种情况下传给服务器的参数为：pageSize,pageNumber
             queryParamsType: '',
             //queryParams: queryParams,
-            sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
             // sortable: true,                     //是否启用排序;意味着整个表格都会排序
             //sortName: 'uid',                    // 设置默认排序为 name
             sortOrder: "asc",                   //排序方式
@@ -124,7 +161,7 @@
             showColumns: true,                  //是否显示所有的列
         //    showRefresh: true,                  //是否显示刷新按钮
         //    showToggle:true,                    //是否显示详细视图和列表视图
-           clickToSelect: true,                //是否启用点击选中行
+            clickToSelect: true,                //是否启用点击选中行
             minimumCountColumns: 2,          //最少允许的列数 clickToSelect: true, //是否启用点击选中行
             pageNumber: 1,                   //初始化加载第一页，默认第一页
             pageSize: 5,                    //每页的记录行数（*）
@@ -145,7 +182,8 @@
                 title: '简略'
             },{
                 field: 'linkUrl',
-                title: '链接地址'
+                title: '链接地址',
+                formatter:linkUrlFormatter
             },{
                 field: 'linkEmail',
                 title: '电子邮箱'
@@ -174,6 +212,9 @@
 
     });
 
+//    $(function () {
+//        $("#myModal").modal("hide");
+//    })
 </script>
 </body>
 </html>

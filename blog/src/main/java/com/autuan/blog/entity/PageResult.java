@@ -2,17 +2,17 @@ package com.autuan.blog.entity;
 
 import java.util.List;
 
-public class PageArticle {
-    private List<Article> rows;
+public class PageResult {
+    private List<?> rows;
     private Integer total;
 
     // ========================= Getter & Setter=========================
 
-    public List<Article> getRows() {
+    public List<?> getRows() {
         return rows;
     }
 
-    public void setRows(List<Article> rows) {
+    public void setRows(List<?> rows) {
         this.rows = rows;
     }
 

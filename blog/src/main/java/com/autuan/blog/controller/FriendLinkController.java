@@ -3,10 +3,14 @@ package com.autuan.blog.controller;
 
 import com.autuan.blog.config.SenderCompent;
 import com.autuan.blog.entity.Link;
+import com.autuan.blog.entity.PageResult;
 import com.autuan.blog.service.LinkService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,8 +24,15 @@ public class FriendLinkController {
     // ------------------------- -------------------------
     @RequestMapping("/getLinkList")
     @GetMapping
-    public List<Link> getLinkList(){
-        return linkService.getLinkList();
+    public PageResult getLinkList(@RequestParam(defaultValue = "1",value = "pageNumber") Integer page,
+                                  @RequestParam(value = "pageSize") Integer rows){
+        PageResult pageResult = new PageResult();
+        PageHelper.startPage(page,rows);
+        List<Link> links = linkService.getLinkList();
+        pageResult.setRows(links);
+        PageInfo<Link> pageInfo = new PageInfo<>(links);
+        pageResult.setTotal((int) pageInfo.getTotal());
+        return pageResult;
     }
 
     @RequestMapping("/getLinkListOS")
