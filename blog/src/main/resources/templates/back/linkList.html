@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-table.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-switch.min.css">
     <style>
         .table-btn{
             margin-top: 5px;
@@ -38,6 +39,7 @@
 <script src="/js/main.js"></script>
 <script src="/js/bootstrap-table.min.js"></script>
 <script src="/js/bootstrap-table-zh-CN.min.js"></script>
+<script src="/js/bootstrap-switch.min.js"></script>
 <script>
     function linkSubmit(){
         var id = $("#linkId").val();
@@ -87,10 +89,28 @@
         }
     };
     function linkShowFormatter(value,row,index) {
-        return "<button>test</button>";
+        return "<input name='status' type='checkbox'>";
     };
     function linkUrlFormatter(value,row,index) {
         return "<a href='"+value+"'>访问博客</a>"
+    }
+    window.showEvents2 = {
+        'change .statusOfLink': function (e, value, row, index) {
+            $('input:checkbox').bootstrapSwitch({
+                onText: "展示",
+                offText: "取消",
+                onColor: "success",
+                offColor: "info",
+                size: "mini",
+                onSwitchChange: function (event, state) {
+                    if (state == true) {
+                        $(this).val("1");
+                    } else {
+                        $(this).val("2");
+                    }
+                }
+            });
+        }
     }
     window.showEvents = {
       'click .ChangeLinkStatus' : function (e,value,row,index) {
@@ -124,7 +144,8 @@
             $("[name='linkEmail']").val(row.linkEmail);
             $("[name='linkQq']").val(row.linkQq);
             // 显示Modal
-            $("#myModal").modal('show');
+            //$("#myModal").modal('show');
+            alert("hello,Autuan")
         },
         'click .ButtonB': function (e, value, row, index) {
             var url = "/back/deleteLink";
@@ -193,7 +214,7 @@
             },{
                 field: 'linkShow',
                 title: '状态',
-                formatter: linkStatusFormatter
+                formatter: linkShowFormatter
             },{
                 field: 'operate',
                 title: '操作',
@@ -202,7 +223,6 @@
                 formatter: operateFormatter
             }, ],
             onLoadSuccess: function (data) { //加载成功时执行
-                console.log(data);
             },
             onLoadError: function (res) { //加载失败时执行
                 console.log(res);
@@ -212,9 +232,6 @@
 
     });
 
-//    $(function () {
-//        $("#myModal").modal("hide");
-//    })
 </script>
 </body>
 </html>

@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-switch.min.css">
     <style>
         .chooseTitle{
             margin-right: 10px;
@@ -49,6 +50,7 @@
                                             <input type="radio" name="articleHot" id="inlineRadio2" value="0"> 否
                                         </label>
                                     </div>
+                                    <input name="status" type="checkbox" data-size="small">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -93,6 +95,7 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/main.js"></script>
 <script src="/js/wangEditor.min.js"></script>
+<script src="/js/bootstrap-switch.min.js"></script>
 <script>
     var E = window.wangEditor;
 
@@ -142,7 +145,24 @@
                 }
             },"text");
         });
-    })
+    });
+
+    $(function () {
+        $('[name="status"]').bootstrapSwitch({
+            onText:"启动",
+            offText:"停止",
+            onColor:"success",
+            offColor:"info",
+            size:"mini",
+            onSwitchChange:function(event,state){
+                if(state==true){
+                    $(this).val("1");
+                }else{
+                    $(this).val("2");
+                }
+            }
+        })
+    });
 </script>
 </body>
 </html>
