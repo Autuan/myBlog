@@ -49,7 +49,6 @@
             var data = $("#newLinkForm").serialize();
             console.log(data);
             var callback = function(obj){
-                alert("over");
                 $("#myModal").modal("hide");
             };
             $.post(url,data,callback,"text");
@@ -144,8 +143,7 @@
             $("[name='linkEmail']").val(row.linkEmail);
             $("[name='linkQq']").val(row.linkQq);
             // 显示Modal
-            //$("#myModal").modal('show');
-            alert("hello,Autuan")
+            $("#myModal").modal('show');
         },
         'click .ButtonB': function (e, value, row, index) {
             var url = "/back/deleteLink";
