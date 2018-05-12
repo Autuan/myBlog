@@ -1,7 +1,6 @@
 package com.autuan.blog.controller;
 
 import com.autuan.blog.entity.Article;
-import com.autuan.blog.entity.PageArticle;
 import com.autuan.blog.service.ArticleService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -42,7 +41,6 @@ public class ShowController {
         mav.addObject("currentPage",page);
         mav.addObject("totalPages",totalPages);
         mav.addObject("pageSize","5");
-        mav.addObject("tempFile","tempFile.html");
         mav.setViewName("blogIndex");
         return mav;
     }
